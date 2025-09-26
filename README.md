@@ -1,7 +1,7 @@
 # 📈 Otimizando o site do Jornal do Commercio e buscando a fidelidade dos clientes  
 
 ## 🎯 Objetivo do Projeto  
-O nosso projeto tem como intuito **conquistar a fidelidade dos clientes do Jornal do Commercio** através da utilização de **estratégias e otimização do site**.  
+Este projeto tem como objetivo **conquistar a fidelidade dos clientes do Jornal do Commercio**, oferecendo uma experiência digital mais agradável por meio de **estratégias de otimização do site**.  
 
 ## 📌 Resultados Esperados  
 - Aumento da taxa de **retenção de leitores**  
@@ -9,15 +9,8 @@ O nosso projeto tem como intuito **conquistar a fidelidade dos clientes do Jorna
 - Melhoria da **imagem da marca** como um veículo moderno e acessível  
 - **Maior engajamento** com o conteúdo jornalístico  
 
-🔗 [Histórias e cenários:](https://docs.google.com/document/d/1dRo1rZinYxXtpklP78JwofUMNUwflzO9PsG-q0wJt4M/edit?tab=t.0)
-
-
-
-
-
-
-
-
-
+## 🔗 Acompanhe Mais  
+- 📄 [Documento completo no Google Docs](https://docs.google.com/document/d/1dRo1rZinYxXtpklP78JwofUMNUwflzO9PsG-q0wJt4M/edit?tab=t.0)  
+- 🌐 [Site oficial do grupo](https://sites.google.com/cesar.school/g11/home)  
 
 
