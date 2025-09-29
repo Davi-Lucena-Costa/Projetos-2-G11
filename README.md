@@ -14,7 +14,5 @@ Este projeto tem como objetivo **conquistar a fidelidade dos clientes do Jornal 
 - 🌐 [Site oficial do grupo](https://sites.google.com/cesar.school/g11/home)  
 - 📊 [Backlog no Jira](https://cesar-team-ir3dm8h6.atlassian.net/jira/software/projects/G1P/boards/67/backlog?atlOrigin=eyJpIjoiZGRkZDdlZmMzODQxNDkzYThmMjQyNjUyN2VjNmQyMjkiLCJwIjoiaiJ9)  
 
-## 🖼️ Backlog do Projeto  
-![Backlog no Jira](./2b4ad2d2-96f7-4e22-ae00-57f02ce8564e.png)  
 
 
