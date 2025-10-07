@@ -15,4 +15,4 @@ Este projeto tem como objetivo **conquistar a fidelidade dos clientes do Jornal 
 
 ### 📊 Backlog do Projeto (Clique na imagem para ver no Jira)
 
-[![Backlog do Projeto no Jira](https://raw.githubusercontent.com/SEU-USUARIO/SEU-REPOSITORIO/main/assets/imagens/imagem-jira.png)](https://cesar-team-ir3dm8h6.atlassian.net/jira/software/projects/G1P/boards/67/backlog)
+[![Backlog do Projeto no Jira](https://github.com/Bernalencouto/Projetos-2-G11/blob/c6c6b0c04ebe8144080f9faddb90b4186e1a7657/imagens/imagem-jira.png)
