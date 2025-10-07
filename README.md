@@ -10,8 +10,9 @@ Este projeto tem como objetivo **conquistar a fidelidade dos clientes do Jornal 
 - **Maior engajamento** com o conteúdo jornalístico
 
 ## 🔗 Acompanhe Mais
-- 📄 [Documento completo no Google Docs](https://docs.google.com/document/d/1dRo1rZinYxXtpklP78JwofUMNUwflzO9PsG-q0wJt4M/edit?tab=t.0)
+- 📄 [Histórias de usuário e cenários](https://docs.google.com/document/d/1dRo1rZinYxXtpklP78JwofUMNUwflzO9PsG-q0wJt4M/edit?tab=t.0)
 - 🌐 [Site oficial do grupo](https://sites.google.com/cesar.school/g11/home)
 
 ### 📊 Backlog do Projeto (Clique na imagem para ver no Jira)
-[![Backlog do Projeto no Jira](https://URL_DA_SUA_IMAGEM_NO_GITHUB_AQUI.png)](https://cesar-team-ir3dm8h6.atlassian.net/jira/software/projects/G1P/boards/67/backlog?atlOrigin=eyJpIjoiZGRkZDdlZmMzODQxNDkzYThmMjQyNjUyN2VjNmQyMjkiLCJwIjoiaiJ9)
+
+[![Backlog do Projeto no Jira](https://raw.githubusercontent.com/SEU-USUARIO/SEU-REPOSITORIO/main/assets/imagens/imagem-jira.png)](https://cesar-team-ir3dm8h6.atlassian.net/jira/software/projects/G1P/boards/67/backlog)
