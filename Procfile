@@ -1,0 +1,1 @@
+web: gunicorn projetos_2_g11.wsgi
