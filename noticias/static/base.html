@@ -14,6 +14,11 @@
             <a href="/">Home</a>
             <a href="/esportes/">Esportes</a>
             <a href="/politica/">Política</a>
+
+            <form method="get" action="{% url 'pesquisar_noticias' %}" class="search-form">
+                <input type="text" name="q" placeholder="Pesquisar..." value="{{ request.GET.q|default:'' }}">
+                <button type="submit" class="search-btn">🔍</button>
+            </form>
         </nav>
     </header>
 
