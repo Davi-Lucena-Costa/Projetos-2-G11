@@ -11,7 +11,7 @@
     {% if resultados %}
         {% for noticia in resultados %}
             <div class="noticia-card">
-                <h3><a href="/noticia/{{ noticia.id }}/">{{ noticia.titulo }}</a></h3>
+                <h3><a href="{% url 'detalhe_noticia' noticia.id %}">{{ noticia.titulo }}</a></h3>
                 <p>Por: {{ noticia.autor }} em {{ noticia.data_publicacao|date:"d/m/Y" }}</p>
             </div>
         {% endfor %}

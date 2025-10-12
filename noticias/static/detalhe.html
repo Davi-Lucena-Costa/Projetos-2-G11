@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="noticia-detalhe">
+        <h1>{{ noticia.titulo }}</h1>
+        <p><em>Por: {{ noticia.autor.username }} em {{ noticia.data_publicacao|date:"d/m/Y" }}</em></p>
+        <hr>
+
+        <div class="conteudo-noticia">
+            {{ noticia.conteudo|safe }} 
+        </div>
+
+        <hr>
+
+        {% if user.is_authenticated %}
+            <form action="{% url 'salvar_noticia' noticia.id %}" method="POST">
+                {% csrf_token %}
+                
+                {% if salvo_para_depois %}
+                    <button type="submit" class="btn-salvar removido">Remover de Ler Mais Tarde</button>
+                {% else %}
+                    <button type="submit" class="btn-salvar">Salvar para Ler Mais Tarde</button>
+                {% endif %}
+            </form>
+        {% else %}
+            <p><a href="{% url 'admin:login' %}?next={{ request.path }}">Faça login</a> para salvar esta notícia.</p>
+        {% endif %}
+    </div>
+{% endblock %}
