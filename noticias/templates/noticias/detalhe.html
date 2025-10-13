@@ -3,7 +3,7 @@
 {% block content %}
     <div class="noticia-detalhe">
         <h1>{{ noticia.titulo }}</h1>
-        <p><em>Por: {{ noticia.autor.username }} em {{ noticia.data_publicacao|date:"d/m/Y" }}</em></p>
+        <p class="info"><em>Por: {{ noticia.autor.username }} em {{ noticia.data_publicacao|date:"d/m/Y" }}</em></p>
         <hr>
 
         <div class="conteudo-noticia">

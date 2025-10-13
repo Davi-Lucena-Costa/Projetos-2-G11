@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Resultados da Pesquisa</h2>
+
+    {% if termo %}
+        <p>Você pesquisou por: <strong>{{ termo }}</strong></p>
+    {% endif %}
+
+    <div class="noticias-container">
+        {% for noticia in resultados %}
+            <div class="noticia-card">
+                <h3><a href="{% url 'detalhe_noticia' noticia.id %}">{{ noticia.titulo }}</a></h3>
+                
+                <p>Por: {{ noticia.autor.username }} em {{ noticia.data_publicacao|date:"d/m/Y" }}</p>
+
+            </div>
+        {% empty %} <p>Nenhuma notícia encontrada para o termo pesquisado.</p>
+        {% endfor %}
+    </div>
+{% endblock %}
