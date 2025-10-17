@@ -3,23 +3,38 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-from .models import Noticia, LerMaisTarde
+# IMPORTANTE: Adicione o modelo 'Pesquisa' aqui
+from .models import Noticia, LerMaisTarde, Pesquisa
 
 def home(request):
     ultimas_noticias = Noticia.objects.all().order_by('-data_publicacao')
     contexto = { 'lista_de_noticias': ultimas_noticias }
-    # CORREÇÃO AQUI:
+    # CORREÇÃO AQUI: (Sua correção já estava certa, mantive)
     return render(request, 'noticias/home.html', contexto)
 
 def pesquisar_noticias(request):
     termo = request.GET.get('q', '').strip()
     resultados = []
+
+    # Só execute a busca e salve se o termo não for vazio
     if termo:
+        # --- LÓGICA PARA SALVAR O HISTÓRICO DA BUSCA ---
+        # Cria um novo objeto Pesquisa com o termo buscado
+        nova_pesquisa = Pesquisa(termo_buscado=termo)
+        # Se o usuário estiver logado, associe a pesquisa a ele
+        if request.user.is_authenticated:
+            nova_pesquisa.usuario = request.user
+        # Salva o registro no banco de dados
+        nova_pesquisa.save()
+        # --- FIM DA NOVA LÓGICA ---
+
+        # A sua lógica de busca continua a mesma aqui
         resultados = Noticia.objects.filter(
             Q(titulo__icontains=termo) | Q(conteudo__icontains=termo)
-        ).order_by('-data_publicacao')
+        ).distinct().order_by('-data_publicacao')
+
     contexto = { 'termo': termo, 'resultados': resultados }
-    # CORREÇÃO AQUI:
+    # CORREÇÃO AQUI: (Sua correção já estava certa, mantive)
     return render(request, 'noticias/pesquisa.html', contexto)
 
 def detalhe_noticia(request, noticia_id):
