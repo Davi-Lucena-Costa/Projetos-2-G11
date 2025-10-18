@@ -1,9 +1,4 @@
 from pathlib import Path
-
-
-BASE_DIR = Path(__file__).resolve().parent.parent
-
-from pathlib import Path
 import os
 from dotenv import load_dotenv
 
@@ -55,9 +50,6 @@ else:
     
 # Application definition
 
-
-
-# Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -100,16 +92,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'projetos_2_g11.wsgi.application'
-
-
-# Database
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [

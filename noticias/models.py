@@ -47,3 +47,23 @@ class LerMaisTarde(models.Model):
 
     def __str__(self):
         return f"{self.usuario.username} salvou '{self.noticia.titulo}'"
+
+# --- NOVA CLASSE ADICIONADA ---
+class Pesquisa(models.Model):
+    termo_buscado = models.CharField(max_length=255)
+    data_busca = models.DateTimeField(auto_now_add=True)
+    
+    # Este campo é opcional, permitindo pesquisas anônimas.
+    # Se um usuário for deletado, a pesquisa dele fica associada a um usuário "nulo".
+    usuario = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+
+    def __str__(self):
+        if self.usuario:
+            return f"'{self.termo_buscado}' por {self.usuario.username}"
+        return f"'{self.termo_buscado}' (anônimo)"
+        
+    class Meta:
+        # Ordena o histórico de pesquisas do mais recente para o mais antigo
+        ordering = ['-data_busca']
+        # Nome mais amigável para a área de administração do Django
+        verbose_name_plural = "Histórico de Pesquisas"
