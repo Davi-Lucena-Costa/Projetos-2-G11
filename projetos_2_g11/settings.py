@@ -21,7 +21,7 @@ SECRET_KEY = os.getenv(
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'https://projetos2g11-bxbscea3eyatdncb.brazilsouth-01.azurewebsites.net'
+    'projetos2g11-bxbscea3eyatdncb.brazilsouth-01.azurewebsites.net'
 ]
 
 # Banco de dados (somente SQLite)
