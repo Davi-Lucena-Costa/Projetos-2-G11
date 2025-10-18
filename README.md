@@ -1,4 +1,4 @@
-# 📈 Otimizando o site do Jornal do Commercio e buscando a fidelidade dos clientes
+# 📈 Otimizando o site do Jornal do Commercio e buscando a fidelidade dos clientes 
 
 ## 🎯 Objetivo do Projeto
 Este projeto tem como objetivo **conquistar a fidelidade dos clientes do Jornal do Commercio**, oferecendo uma experiência digital mais agradável por meio de **estratégias de otimização do site**.
