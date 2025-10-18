@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'noticias',
     "whitenoise.runserver_nostatic",
+    "SugestõesUsuarios",     
 ]
 
 # Middleware
