@@ -97,6 +97,10 @@ def index(request):
             dados_sugestao['erro'] = e.message  #Captura a mensagem de erro para exibir no template
             messages.error(request, f"Erro ao enviar sugestão, verificar conteúdo")
 
-    context = { 'sugestao': dados_sugestao }
+    ultimas_noticias = Noticia.objects.all().order_by('-data_publicacao')        
+
+    context = { 
+        'lista_de_noticias': ultimas_noticias,
+        'sugestao': dados_sugestao }
 
     return render(request, 'noticias/sugestao_index.html', context)
