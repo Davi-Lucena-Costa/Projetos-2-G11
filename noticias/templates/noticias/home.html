@@ -1,6 +1,8 @@
 {% extends 'noticias/base.html' %}
 
 {% block content %}
+
+    {% include 'noticias/sugestao_form.html' %}
     <h2>Últimas Notícias</h2>
     <div class="noticias-container">
         {% for noticia in lista_de_noticias %}
