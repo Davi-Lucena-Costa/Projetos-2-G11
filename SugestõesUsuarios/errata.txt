@@ -1,0 +1,3 @@
+Apenas uma correção referente a descrição do commit.. anterior.. a variavel receberá as linhas da 
+tabela no banco de dados em ordem decrescente da mais nova para a mais antiga! E não consultar as 
+TABELAS DO BANCO DE DADOS!
