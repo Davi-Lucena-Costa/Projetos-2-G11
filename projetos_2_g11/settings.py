@@ -102,6 +102,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# No final de projetos_2_g11/settings.py
+
 CSRF_TRUSTED_ORIGINS = [
     "https://projetos2g11-bxbscea3eyatdncb.brazilsouth-01.azurewebsites.net",
 ]
+
+LOGIN_REDIRECT_URL = '/'
