@@ -11,13 +11,12 @@ TARGET_ENV = os.getenv('TARGET_ENV', 'dev')
 # Ativa modo debug se não for produção
 DEBUG = not TARGET_ENV.lower().startswith('prod')
 
-# Chave secreta — pode ser fixa localmente
+# Chave secreta 
 SECRET_KEY = os.getenv(
     'SECRET_KEY',
     'django-insecure-g1qu$9_0vz4^!9gdp00eqdztm1p#rf!gpikrc0diz)22pf3!ub'
 )
 
-# Hosts permitidos — ajuste conforme necessário
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
@@ -40,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # Sua aplicação principal
     'noticias',
-    "whitenoise.runserver_nostatic",
-    "SugestõesUsuarios",     
+    
+    'whitenoise.runserver_nostatic',
+
 ]
 
 # Middleware

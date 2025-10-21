@@ -1,46 +1,73 @@
-# noticias/views.py
-
 from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
-# IMPORTANTE: Adicione o modelo 'Pesquisa' aqui
-from .models import Noticia, LerMaisTarde, Pesquisa
-from django.core.exceptions import ValidationError  #Importe para a captura de erros
-from django.contrib import messages  
-from SugestõesUsuarios.models import SugestaoUser # Importe da model/class
+from django.core.exceptions import ValidationError # Importe para a captura de erros
+from django.contrib import messages 
 
 
-
+# Todos os seus modelos agora são importados do mesmo lugar.
+from .models import Noticia, LerMaisTarde, Pesquisa, SugestaoUser
 
 def home(request):
+    
+ 
+    dados_sugestao = {
+        'texto_sugerido': '', # Começa vazio
+        'erro': None
+    }
+
+    if request.method == 'POST':
+        # Verificamos se o POST é do formulário de sugestão
+        if 'sugestao_texto' in request.POST:
+            texto_brut = request.POST.get('sugestao_texto')
+            dados_sugestao['texto_sugerido'] = texto_brut # Guarda o texto digitado
+            
+            usuario = request.user if request.user.is_authenticated else None
+            
+            try:
+                # 1. Crie a instância do modelo
+                sugestao = SugestaoUser(texto=texto_brut, usuario=usuario)
+                
+                # 2. Rode o método clean() que está no models.py
+                sugestao.full_clean() 
+                
+                # 3. Se a validação passar, salve no banco
+                sugestao.save()
+
+                messages.success(request, "Sugestão enviada com sucesso! Obrigado :)")
+                return redirect('home') # Redireciona para a home
+            
+            except ValidationError as e:
+                # Pega a(s) mensagem(ns) de erro do 'clean()'
+                dados_sugestao['erro'] = e.messages[0] if e.messages else "Erro de validação."
+                messages.error(request, f"Erro ao enviar sugestão: {dados_sugestao['erro']}")
+    
+    # A lógica de buscar notícias continua a mesma
     ultimas_noticias = Noticia.objects.all().order_by('-data_publicacao')
-    contexto = { 'lista_de_noticias': ultimas_noticias }
-    # CORREÇÃO AQUI: (Sua correção já estava certa, mantive)
+    
+    contexto = { 
+        'lista_de_noticias': ultimas_noticias,
+        'sugestao': dados_sugestao # Envia os dados do formulário para o template
+    }
+    
+    # Renderiza a home page
     return render(request, 'noticias/home.html', contexto)
 
 def pesquisar_noticias(request):
     termo = request.GET.get('q', '').strip()
     resultados = []
 
-    # Só execute a busca e salve se o termo não for vazio
     if termo:
-        # --- LÓGICA PARA SALVAR O HISTÓRICO DA BUSCA ---
-        # Cria um novo objeto Pesquisa com o termo buscado
         nova_pesquisa = Pesquisa(termo_buscado=termo)
-        # Se o usuário estiver logado, associe a pesquisa a ele
         if request.user.is_authenticated:
             nova_pesquisa.usuario = request.user
-        # Salva o registro no banco de dados
         nova_pesquisa.save()
-        # --- FIM DA NOVA LÓGICA ---
 
-        # A sua lógica de busca continua a mesma aqui
         resultados = Noticia.objects.filter(
             Q(titulo__icontains=termo) | Q(conteudo__icontains=termo)
         ).distinct().order_by('-data_publicacao')
 
     contexto = { 'termo': termo, 'resultados': resultados }
-    # CORREÇÃO AQUI: (Sua correção já estava certa, mantive)
     return render(request, 'noticias/pesquisa.html', contexto)
 
 def detalhe_noticia(request, noticia_id):
@@ -67,40 +94,3 @@ def lista_salvos(request):
     
     return render(request, 'noticias/salvos.html', contexto)
 
-
-def index(request):
-
-#Dicionário para armazenar o valor anterior e os erros
-    dados_sugestao = {
-        'texto_sugerido': request.POST.get('sugestao_texto', '') , #Pegando o valor anterior
-        'erro': None
-    }
-
-    if request.method == 'POST':
-
-        texto_brut = request.POST.get('sugestao_texto') #Pegamos o valor bruto do post ('sugestao_texto' no html)
-
-        dados_sugestao['texto_sugerido'] = texto_brut  #Mantemos o valor anterior em caso de erro
-
-        try:
-
-            texto_limpo = SugestaoUser.validar_Sugestao(texto_brut) 
-
-            #salvar
-            sugestap = SugestaoUser.objects.create(texto=texto_limpo, usuario=request.user if request.user.is_authenticated else None)
-
-            messages.sucess(request, "Sugestão enviado com sucesso! Obrigado :)")
-            return redirect('noticias:home')  #Redireciona para a home após o sucesso
-        
-        except ValidationError as e:
-
-            dados_sugestao['erro'] = e.message  #Captura a mensagem de erro para exibir no template
-            messages.error(request, f"Erro ao enviar sugestão, verificar conteúdo")
-
-    ultimas_noticias = Noticia.objects.all().order_by('-data_publicacao')        
-
-    context = { 
-        'lista_de_noticias': ultimas_noticias,
-        'sugestao': dados_sugestao }
-
-    return render(request, 'noticias/sugestao_index.html', context)
