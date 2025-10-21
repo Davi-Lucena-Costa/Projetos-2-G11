@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Noticia, LerMaisTarde, Pesquisa
 from django.core.exceptions import ValidationError  #Importe para a captura de erros
 from django.contrib import messages  
-from SugestõesUsuarios.models import SugestaoUser # Importe da model/class
+from .models import SugestaoUser  # Importe da model/class
 
 
 
@@ -68,39 +68,45 @@ def lista_salvos(request):
     return render(request, 'noticias/salvos.html', contexto)
 
 
-def index(request):
-
-#Dicionário para armazenar o valor anterior e os erros
+def home(request): 
+    
+    # Dicionário para armazenar o valor anterior e os erros
     dados_sugestao = {
-        'texto_sugerido': request.POST.get('sugestao_texto', '') , #Pegando o valor anterior
+        'texto_sugerido': request.POST.get('sugestao_texto', '') , 
         'erro': None
     }
 
     if request.method == 'POST':
 
-        texto_brut = request.POST.get('sugestao_texto') #Pegamos o valor bruto do post ('sugestao_texto' no html)
-
-        dados_sugestao['texto_sugerido'] = texto_brut  #Mantemos o valor anterior em caso de erro
+        texto_brut = request.POST.get('sugestao_texto') 
+        dados_sugestao['texto_sugerido'] = texto_brut 
 
         try:
-
             texto_limpo = SugestaoUser.validar_Sugestao(texto_brut) 
 
-            #salvar
-            sugestap = SugestaoUser.objects.create(texto=texto_limpo, usuario=request.user if request.user.is_authenticated else None)
+            # Salvar (Corrigido 'sugestap' para 'sugestao')
+            sugestao = SugestaoUser.objects.create(
+                texto=texto_limpo, 
+                usuario=request.user if request.user.is_authenticated else None
+            )
 
-            messages.sucess(request, "Sugestão enviado com sucesso! Obrigado :)")
-            return redirect('noticias:home')  #Redireciona para a home após o sucesso
+            # Corrigido 'messages.sucess' para 'messages.success'
+            messages.success(request, "Sugestão enviada com sucesso! Obrigado :)")
+            
+            # Corrigido o redirect
+            return redirect('home')  
         
         except ValidationError as e:
+            dados_sugestao['erro'] = e.message
+            messages.error(request, "Erro ao enviar sugestão. Verifique o conteúdo.") 
 
-            dados_sugestao['erro'] = e.message  #Captura a mensagem de erro para exibir no template
-            messages.error(request, f"Erro ao enviar sugestão, verificar conteúdo")
-
+    # Lógica de GET (e POST com erro, sem redirect)
     ultimas_noticias = Noticia.objects.all().order_by('-data_publicacao')        
 
     context = { 
         'lista_de_noticias': ultimas_noticias,
-        'sugestao': dados_sugestao }
+        'sugestao': dados_sugestao 
+    }
 
-    return render(request, 'noticias/sugestao_index.html', context)
+   
+    return render(request, 'noticias/home.html', context)
