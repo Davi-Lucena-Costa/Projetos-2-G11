@@ -1,5 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
+
 
 # Modelo para as categorias das notícias
 class Categoria(models.Model):
@@ -67,3 +70,55 @@ class Pesquisa(models.Model):
         ordering = ['-data_busca']
         # Nome mais amigável para a área de administração do Django
         verbose_name_plural = "Histórico de Pesquisas"
+
+
+
+# Obtém o modelo de usuário ativo no projeto
+User = get_user_model() 
+
+
+
+class SugestaoUser(models.Model):
+    # Campo de texto principal da sugestão
+    texto = models.TextField(verbose_name="Texto da Sugestão")
+    
+    # Usuário que sugeriu (pode ser nulo/anônimo)
+    usuario = models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL, 
+        null=True, 
+        blank=True, 
+        verbose_name="Usuário (opcional)"
+    )
+
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+    # *************************************************************
+    # LÓGICA DE VALIDAÇÃO (Método Estático)
+    # *************************************************************
+    @staticmethod
+    def validar_Sugestao(texto):
+        texto = texto.strip()  
+
+        
+        texto_lower = texto.lower() 
+
+        if len(texto) < 4:
+            raise ValidationError("Susgestão muito curta. Digite pelo menos 4 caracteres.")
+        
+
+        palavras_proibidas = ['crimes', 'spam', 'sem sentido', 'venda_ilegal']
+        for palavra in palavras_proibidas:
+            if palavra in texto_lower:
+                raise ValidationError("A sugestão contém uma palavra inválida: por favor seja mais específico")
+        
+        return texto
+    # *************************************************************
+    
+    def __str__(self):
+        # Retorna os primeiros 50 caracteres da sugestão para representação em string
+        return self.texto[:50]  
+
+    class Meta:
+        verbose_name = "Sugestão de Usuário"
+        verbose_name_plural = "Sugestões de Usuários"
