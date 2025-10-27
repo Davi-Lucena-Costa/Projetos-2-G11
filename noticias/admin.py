@@ -1,6 +1,6 @@
 from django.contrib import admin
-# IMPORTANTE: Adicione o modelo 'Pesquisa' aqui
-from .models import Noticia, Categoria, ModoLeitura, LerMaisTarde, Pesquisa
+# IMPORTANTE: Adicionamos o modelo 'Comentario' à importação
+from .models import Noticia, Categoria, ModoLeitura, LerMaisTarde, Pesquisa, Comentario
 
 # Para gerenciar o ModoLeitura dentro da própria Notícia
 class ModoLeituraInline(admin.StackedInline):
@@ -27,20 +27,38 @@ class LerMaisTardeAdmin(admin.ModelAdmin):
     list_filter = ('usuario', 'salvo_em')
     search_fields = ('usuario__username', 'noticia__titulo')
 
-# --- NOVA CLASSE ADMIN ADICIONADA ---
 # Para gerenciar o histórico de Pesquisas no painel de Admin
 @admin.register(Pesquisa)
 class PesquisaAdmin(admin.ModelAdmin):
     list_display = ('termo_buscado', 'usuario', 'data_busca')
     list_filter = ('data_busca', 'usuario')
     search_fields = ('termo_buscado', 'usuario__username')
-    # Torna o painel 'somente leitura', já que não faz sentido editar um histórico de busca
     readonly_fields = ('termo_buscado', 'usuario', 'data_busca')
 
-    # Desabilita a opção de adicionar novas pesquisas manualmente pelo admin
     def has_add_permission(self, request):
         return False
 
-    # Desabilita a opção de deletar pesquisas pelo admin (opcional, mas recomendado)
     def has_delete_permission(self, request, obj=None):
+        return False
+
+# --- NOVA CLASSE ADMIN ADICIONADA ---
+# Para gerenciar e moderar os Comentários
+@admin.register(Comentario)
+class ComentarioAdmin(admin.ModelAdmin):
+    # O que mostrar na lista de comentários
+    list_display = ('noticia', 'autor', 'data_criacao', 'conteudo')
+    
+    # Como filtrar os comentários
+    list_filter = ('data_criacao', 'autor')
+    
+    # Campos pelos quais podemos pesquisar
+    search_fields = ('conteudo', 'autor__username', 'noticia__titulo')
+    
+    # Um admin não deve editar o comentário de um usuário, apenas aprovar ou apagar.
+    # Por isso, tornamos os campos "somente leitura"
+    readonly_fields = ('noticia', 'autor', 'conteudo', 'data_criacao')
+
+    # Desabilita a opção de "Adicionar" um comentário manualmente pelo admin
+    # (Comentários só podem ser criados pelo site)
+    def has_add_permission(self, request):
         return False

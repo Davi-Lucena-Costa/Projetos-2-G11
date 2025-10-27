@@ -25,20 +25,43 @@
 
             <form method="get" action="{% url 'pesquisar_noticias' %}" class="search-form">
                 <input type="text" name="q" placeholder="Pesquisar..." value="{{ request.GET.q|default:'' }}">
-                <button type="submit" class="search-btn">🔍</button>
+                <button type="submit" class="search-btn" aria-label="Buscar">🔍</button>
             </form>
         </nav>
     </header>
 
     <main>
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
         {% block content %}
         {% endblock %}
     </main>
 
     <footer>
+        <div class="sugestao-form">
+            <h4>Envie-nos uma sugestão:</h4>
+            
+            <form action="{% url 'home' %}" method="POST">
+                {% csrf_token %}
+                <textarea name="sugestao_texto" rows="3" placeholder="Sua sugestão...">{{ sugestao.texto_sugerido }}</textarea>
+                
+                {% if sugestao.erro %}
+                    <p class="error-message">{{ sugestao.erro }}</p>
+                {% endif %}
+                
+                <button type="submit" name="sugestao_texto" class="btn-sugestao">Enviar Sugestão</button>
+            </form>
+        </div>
+
         <p>&copy; 2025 - Jornal do Commercio - Todos os direitos reservados.</p>
     </footer>
 
-    <script src="{% static 'noticias/js/main.js' %}"></script>
+    <script src="{% static 'noticias/js/modelo.js' %}"></script>
 </body>
 </html>
