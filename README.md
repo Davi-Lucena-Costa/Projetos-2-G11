@@ -10,7 +10,7 @@ Este projeto tem como objetivo **conquistar a fidelidade dos clientes do Jornal 
 - **Maior engajamento** com o conteúdo jornalístico
 
 ## 🔗 Acompanhe Mais
-- 🚀 **[Site no Ar (Azure)](https://projetos2g11-bxbscea3eyatdncb.brazilsouth-01.azurewebsites.net)**
+- 🚀 **[Site no Ar](https://projetos2g11-bxbscea3eyatdncb.brazilsouth-01.azurewebsites.net)**
 - 📄 [Histórias de usuário e cenários](https://docs.google.com/document/d/1dRo1rZinYxXtpklP78JwofUMNUwflzO9PsG-q0wJt4M/edit?tab=t.0)
 - 🌐 [Site oficial do grupo](https://sites.google.com/cesar.school/g11/home)
 
