@@ -93,4 +93,28 @@ class SugestaoUser(models.Model):
         self.texto = texto # Salva o texto limpo (sem espaços extras)
 
     def __str__(self):
-        return self.texto[:50] # Retorna os primeiros 50 caracteres
+        return self.texto[:50] # Retorna os primeiros 50 caracteres 
+
+# --- NOVA CLASSE ADICIONADA ---
+# Modelo para os comentários das notícias
+class Comentario(models.Model):
+    # Relação com a Notícia: se a notícia é apagada, os comentários somem.
+    # related_name='comentarios' permite que a gente acesse noticia.comentarios.all()
+    noticia = models.ForeignKey(Noticia, on_delete=models.CASCADE, related_name='comentarios')
+    
+    # Relação com o Autor: se o usuário é apagado, seus comentários somem.
+    autor = models.ForeignKey(User, on_delete=models.CASCADE)
+    
+    # O texto do comentário
+    conteudo = models.TextField(max_length=500)
+    
+    # Data de criação (definida automaticamente quando o comentário é salvo)
+    data_criacao = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        # Ordena os comentários do mais antigo para o mais novo (ordem de leitura)
+        ordering = ['data_criacao']
+
+    def __str__(self):
+        # Um texto útil para vermos no painel de administração
+        return f"Comentário de {self.autor.username} em '{self.noticia.titulo[:20]}...'"
