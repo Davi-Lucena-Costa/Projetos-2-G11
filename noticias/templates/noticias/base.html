@@ -4,64 +4,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jornal do Commercio</title>
+    <meta name="description" content="O portal de notícias do Jornal do Commercio, otimizado para você.">
+    
+    <title>{% block title %}Jornal do Commercio{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="{% static 'noticias/css/style.css' %}">
 </head>
 <body>
 
-    <header>
-        <h1><a href="{% url 'home' %}">Jornal do Commercio</a></h1>
-        <nav>
-            <a href="{% url 'home' %}">Home</a>
-            <a href="#">Esportes</a>
-            <a href="#">Política</a>
+    <header class="site-header">
+        <div class="container header-container">
+            
+            <h1 class="logo">
+                <a href="{% url 'home' %}">Jornal do Commercio</a>
+            </h1>
 
-            {% if user.is_authenticated %}
-                <a href="{% url 'lista_salvos' %}">Meus Salvos</a>
-                <a href="{% url 'admin:logout' %}">Sair ({{ user.username }})</a>
-            {% else %}
-                <a href="{% url 'admin:login' %}">Login</a>
-            {% endif %}
+            <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
+                &#9776; </button>
 
-            <form method="get" action="{% url 'pesquisar_noticias' %}" class="search-form">
-                <input type="text" name="q" placeholder="Pesquisar..." value="{{ request.GET.q|default:'' }}">
-                <button type="submit" class="search-btn" aria-label="Buscar">🔍</button>
-            </form>
-        </nav>
+            <nav class="main-nav" id="main-nav">
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="#">Esportes</a></li>
+                    <li><a href="#">Política</a></li>
+                    
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'lista_salvos' %}">Meus Salvos</a></li>
+                        <li><a href="{% url 'admin:logout' %}">Sair ({{ user.username }})</a></li>
+                    {% else %}
+                        <li><a href="{% url 'admin:login' %}">Login</a></li>
+                    {% endif %}
+                    
+                    <li>
+                        <form method="get" action="{% url 'pesquisar_noticias' %}" class="search-form">
+                            <input type="text" name="q" placeholder="Pesquisar..." value="{{ request.GET.q|default:'' }}" aria-label="Pesquisar">
+                            <button type="submit" class="search-btn" aria-label="Buscar">🔍</button>
+                        </form>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main>
-        {% if messages %}
-            <div class="messages">
-                {% for message in messages %}
-                    <p class="message {{ message.tags }}">{{ message }}</p>
-                {% endfor %}
-            </div>
-        {% endif %}
+    {% if messages %}
+        <div class="messages-container">
+            {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
 
+    <main>
         {% block content %}
         {% endblock %}
     </main>
 
-    <footer>
-        <div class="sugestao-form">
-            <h4>Envie-nos uma sugestão:</h4>
-            
-            <form action="{% url 'home' %}" method="POST">
-                {% csrf_token %}
-                <textarea name="sugestao_texto" rows="3" placeholder="Sua sugestão...">{{ sugestao.texto_sugerido }}</textarea>
-                
-                {% if sugestao.erro %}
-                    <p class="error-message">{{ sugestao.erro }}</p>
-                {% endif %}
-                
-                <button type="submit" name="sugestao_texto" class="btn-sugestao">Enviar Sugestão</button>
-            </form>
-        </div>
-
-        <p>&copy; 2025 - Jornal do Commercio - Todos os direitos reservados.</p>
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; {% now "Y" %} - Jornal do Commercio - Todos os direitos reservados.</p>
+            </div>
     </footer>
 
-    <script src="{% static 'noticias/js/modelo.js' %}"></script>
+    <script src="{% static 'noticias/js/main.js' %}"></script>
 </body>
 </html>
