@@ -1,16 +1,26 @@
 {% extends 'noticias/base.html' %}
 
 {% block content %}
-    <h2>Minha Lista de Leitura</h2>
+<div class="container">
+    
+    <h1 class="page-title">Minha Lista de Leitura</h1>
+    <p class="page-subtitle">Notícias que você salvou para ler mais tarde.</p>
 
     <div class="noticias-container">
+        
         {% for item in itens_salvos %}
-            <div class="noticia-card">
-                <h3><a href="{% url 'detalhe_noticia' item.noticia.id %}">{{ item.noticia.titulo }}</a></h3>
-                <p>Salvo em: {{ item.salvo_em|date:"d/m/Y" }}</p>
-            </div>
+            <a href="{% url 'detalhe_noticia' item.noticia.id %}" class="noticia-card-link">
+                <article class="noticia-card">
+                    <h3>{{ item.noticia.titulo }}</h3>
+                    <p class="noticia-meta">
+                        Salvo em: {{ item.salvo_em|date:"d/m/Y H:i" }}
+                    </p>
+                </article>
+            </a>
         {% empty %}
-            <p>Você ainda não salvou nenhuma notícia para ler mais tarde.</p>
+             <p class="empty-message">Você ainda não salvou nenhuma notícia para ler mais tarde.</p>
         {% endfor %}
+
     </div>
+</div>
 {% endblock %}
