@@ -1,122 +1,528 @@
-/* noticias/static/noticias/css/style.css */
+/* --- 1. CONFIGURAÇÃO GLOBAL E VARIÁVEIS --- */
 
-/* --- GERAL --- */
-body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+/* Importamos as fontes que pedimos no base.html */
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap');
+
+/* Usar variáveis CSS é a forma moderna de manter um design consistente.
+  Se quisermos mudar a cor principal do site, só precisamos mudar em um lugar.
+*/
+:root {
+    --font-serif: 'Merriweather', serif; /* Fonte "de jornal" para títulos */
+    --font-sans: 'Lato', sans-serif;       /* Fonte limpa para textos corridos */
+    
+    /* Paleta de Cores Profissional */
+    --color-background: #FFFFFF;         /* Fundo branco */
+    --color-text: #222222;               /* Preto suave (mais legível) */
+    --color-brand-primary: #0A369D;     /* Azul escuro (cor da marca, para confiança) */
+    --color-brand-secondary: #DC3545;   /* Vermelho (para botões de "remover") */
+    --color-border: #EAEAEA;             /* Cinza bem claro para bordas */
+    --color-footer-bg: #1a1a1a;         /* Fundo escuro para o rodapé */
+
+    --layout-max-width: 1100px; /* Largura máxima do conteúdo */
+    --layout-border-radius: 4px;
+}
+
+/* Um "Reset" simples para garantir consistência entre navegadores */
+* {
+    box-sizing: border-box;
     margin: 0;
-    background-color: #f8f9fa;
-    color: #212529;
+    padding: 0;
+}
+
+/* --- 2. ESTILOS GERAIS DO BODY --- */
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-text);
     line-height: 1.6;
+    font-size: 16px; /* Tamanho base */
 }
-main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
-a { color: #0d6efd; text-decoration: none; }
-a:hover { text-decoration: underline; }
-hr { border: 0; border-top: 1px solid #dee2e6; margin: 2rem 0; }
 
-/* --- CABEÇALHO E NAVEGAÇÃO --- */
-header { background-color: #fff; border-bottom: 1px solid #dee2e6; padding: 1rem; text-align: center; }
-header h1 a { color: #212529; font-size: 1.8rem; }
-header nav { margin-top: 1rem; }
-header nav a { color: #495057; margin: 0 10px; font-weight: 500; }
-.search-form { display: inline-block; margin-left: 20px; }
-.search-form input { border: 1px solid #ced4da; padding: 5px 8px; border-radius: 4px; }
-.search-form button { background: none; border: none; cursor: pointer; font-size: 1rem; }
-
-/* --- CARDS DE NOTÍCIA (HOME, PESQUISA, SALVOS) --- */
-.noticias-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
-.noticia-card {
-    background-color: #fff;
-    border: 1px solid #dee2e6;
-    border-radius: 0.25rem;
-    padding: 1.25rem;
-    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+/* O container principal que limita a largura do conteúdo */
+.container {
+    max-width: var(--layout-max-width);
+    margin: 0 auto;
+    padding: 0 1rem; /* 1rem = 16px de espaçamento nas laterais */
 }
-.noticia-card:hover { transform: translateY(-5px); box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); }
-.noticia-card h3 { margin-top: 0; font-size: 1.2rem; }
-.noticia-card p { font-size: 0.9em; color: #6c757d; margin-bottom: 0; }
 
-/* --- PÁGINA DE DETALHE DA NOTÍCIA --- */
-.noticia-detalhe { background-color: #fff; padding: 2rem; border-radius: 0.25rem; border: 1px solid #dee2e6; }
-.noticia-detalhe .info { color: #6c757d; margin-bottom: 1.5rem; }
-.conteudo-noticia p { margin-bottom: 1rem; }
-.conteudo-noticia b, .conteudo-noticia strong { font-weight: 600; }
+a {
+    color: var(--color-brand-primary);
+    text-decoration: none;
+    transition: opacity 0.2s ease;
+}
+a:hover {
+    text-decoration: underline;
+    opacity: 0.8;
+}
 
-/* --- BOTÃO "SALVAR PARA DEPOIS" --- */
-.btn-salvar {
-    display: inline-block;
-    font-weight: 400;
-    color: #fff;
-    background-color: #0d6efd;
-    text-align: center;
-    vertical-align: middle;
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+hr {
+    border: 0;
+    border-top: 1px solid var(--color-border);
+    margin: 2rem 0;
+}
+
+/* --- 3. ESTILOS DE TIPOGRAFIA (A "ALMA" DO JORNAL) --- */
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: 1rem;
+    color: var(--color-text);
+}
+
+/* --- 4. CABEÇALHO E NAVEGAÇÃO --- */
+.site-header {
+    width: 100%;
+    background-color: var(--color-background);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem 0;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo a {
+    font-family: var(--font-serif);
+    font-size: 1.75rem; /* 28px */
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Espaço entre os itens do menu */
+}
+.main-nav a {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.9rem; /* 14.4px */
+    text-transform: uppercase;
+}
+.main-nav a:hover {
+    color: var(--color-brand-primary);
+}
+
+/* Estilos do formulário de pesquisa no cabeçalho */
+.search-form {
+    display: flex;
+}
+.search-form input[type="text"] {
+    border: 1px solid var(--color-border);
+    border-right: none;
+    padding: 0.5rem;
+    border-radius: var(--layout-border-radius) 0 0 var(--layout-border-radius);
+    font-family: var(--font-sans);
+}
+.search-form input[type="text"]:focus {
+    outline: 2px solid var(--color-brand-primary);
+}
+.search-form .search-btn {
+    border: 1px solid var(--color-border);
+    background-color: #f8f8f8;
     cursor: pointer;
-    border: 1px solid #0d6efd;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    border-radius: 0.25rem;
-    transition: background-color 0.15s ease-in-out;
+    padding: 0 0.75rem;
+    border-radius: 0 var(--layout-border-radius) var(--layout-border-radius) 0;
 }
-.btn-salvar:hover { background-color: #0b5ed7; }
-.btn-salvar.removido { background-color: #dc3545; border-color: #dc3545; }
-.btn-salvar.removido:hover { background-color: #bb2d3b; }
+.search-form .search-btn:hover {
+    background-color: #eee;
+}
 
+/* Botão de Menu Mobile (escondido por padrão) */
+.nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
 
-footer { text-align: center; padding: 2rem; margin-top: 2rem; background-color: #e9ecef; color: #6c757d; font-size: 0.9em; }
+/* --- 5. CONTEÚDO PRINCIPAL E RODAPÉ --- */
+main {
+    /* O container é aplicado dentro do <main> no base.html */
+    min-height: 60vh; /* Garante que o rodapé fique lá embaixo */
+    padding: 2rem 0;
+}
 
+.site-footer {
+    background-color: var(--color-footer-bg);
+    color: #a0a0a0; /* Cinza claro para o texto do rodapé */
+    padding: 2rem 0;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+}
+.site-footer .container {
+    text-align: center;
+}
 
-.messages {
+/* --- 6. ESTILOS DE MENSAGENS E BOTÕES --- */
+
+/* Container das mensagens de feedback */
+.messages-container {
+    max-width: var(--layout-max-width);
+    margin: 1rem auto -1rem auto;
     padding: 0 1rem;
-
-    margin: -2rem -1rem 2rem -1rem; 
-    max-width: 960px;
 }
 .message {
     padding: 1rem;
     margin-bottom: 1rem;
-    border-radius: 0.25rem;
+    border-radius: var(--layout-border-radius);
     color: #fff;
+    font-weight: 700;
 }
 .message.success {
-    background-color: #198754; 
+    background-color: #198754; /* Verde sucesso */
 }
 .message.error {
-    background-color: #dc3545;
+    background-color: var(--color-brand-secondary); /* Vermelho erro */
+}
+
+/* --- 7. DESIGN RESPONSIVO (MOBILE) --- */
+@media (max-width: 800px) {
+    .header-container {
+        /* Permite que o logo e o botão fiquem em lados opostos */
+        flex-wrap: wrap; 
+    }
+
+    /* Mostra o botão hambúrguer */
+    .nav-toggle {
+        display: block;
+    }
+
+    /* Esconde a navegação */
+    .main-nav {
+        display: none;
+        width: 100%; /* Ocupa a largura total quando aberto */
+        margin-top: 1rem;
+    }
+    .main-nav ul {
+        flex-direction: column; /* Empilha os itens do menu */
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    /* Classe que o JavaScript vai adicionar para ABRIR o menu */
+    .main-nav.is-active {
+        display: block;
+    }
+}
+/* --- 8. ESTILOS DA HOME (GRID DE NOTÍCIAS) --- */
+
+.page-title {
+    font-size: 2.5rem; /* 40px */
+    border-bottom: 2px solid var(--color-brand-primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.noticias-container {
+    display: grid;
+    /* Cria colunas responsivas:
+       - Tenta criar colunas de no mínimo 300px.
+       - Se houver espaço, elas crescem (1fr) para preencher.
+       - 'auto-fill' cria quantas colunas couberem.
+    */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem; /* 24px de espaço entre os cards */
+}
+
+.noticia-card {
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--layout-border-radius);
+    padding: 1.5rem;
+    height: 100%; /* Faz todos os cards terem a mesma altura */
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+/* Transforma o <a> em um bloco para o card inteiro ser clicável */
+.noticia-card-link {
+    text-decoration: none;
+    color: inherit; /* Herda a cor do texto padrão */
+}
+.noticia-card-link:hover .noticia-card {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Título do card (usando a fonte de jornal) */
+.noticia-card h3 {
+    font-family: var(--font-serif);
+    font-size: 1.35rem; /* 21.6px */
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+}
+
+/* Texto de "Por: Autor..." */
+.noticia-meta {
+    font-size: 0.85rem; /* 13.6px */
+    color: #6c757d; /* Cinza para informações secundárias */
+    margin-top: auto; /* Truque de Flexbox: empurra isso para o final do card */
+    padding-top: 1rem;
+}
+
+/* Divisor de seção (para separar o grid da sugestão) */
+.section-divider {
+    border-top: 3px solid var(--color-border);
+    margin: 3rem 0;
+}
+
+/* --- 9. ESTILOS DO FORMULÁRIO DE SUGESTÃO (HOME) --- */
+
+.sugestao-section {
+    max-width: 600px;
+    margin: 2rem auto; /* Centraliza a seção */
+    padding: 2rem;
+    background-color: #f8f9fa; /* Um fundo levemente cinza */
+    border: 1px solid var(--color-border);
+    border-radius: var(--layout-border-radius);
+    text-align: center;
+}
+.sugestao-section p {
+    margin-bottom: 1.5rem;
+    color: #495057;
 }
 
 .sugestao-form {
-    max-width: 500px;
-    margin: 0 auto 2rem auto;
-    text-align: left;
-    color: #495057; /* Cor do texto mais escura para o rodapé claro */
+    display: flex;
+    flex-direction: column;
 }
-.sugestao-form h4 {
+
+.sugestao-form textarea {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--layout-border-radius);
+    margin-bottom: 1rem;
+    min-height: 80px;
+}
+.sugestao-form textarea:focus {
+    outline: none;
+    border-color: var(--color-brand-primary);
+    box-shadow: 0 0 0 3px rgba(10, 54, 157, 0.2); /* Sombra de foco azul */
+}
+
+/* Classe de botão genérica */
+.btn {
+    display: inline-block;
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1rem;
     text-align: center;
+    cursor: pointer;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--layout-border-radius);
+    transition: background-color 0.2s ease-out;
+    text-decoration: none !important;
+}
+
+/* Botão Primário (Azul) */
+.btn-primary {
+    background-color: var(--color-brand-primary);
+    color: #fff;
+}
+.btn-primary:hover {
+    background-color: #082a7a; /* Um azul mais escuro no hover */
+}
+
+.sugestao-form .error-message {
+    color: var(--color-brand-secondary);
+    font-size: 0.9em;
+    font-weight: 700;
+}
+
+/* --- 10. ESTILOS DA PÁGINA DE ARTIGO (DETALHE) --- */
+
+/* Cria o "container de leitura" mais estreito e centralizado */
+.artigo-principal,
+.secao-comentarios {
+    max-width: 740px; /* Largura ideal para leitura */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* O título do artigo: grande e com a fonte de jornal */
+.artigo-header h1 {
+    font-family: var(--font-serif);
+    font-size: 2.8rem; /* 44.8px */
+    line-height: 1.2;
     margin-bottom: 1rem;
 }
-.sugestao-form textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border: 1px solid #ced4da; 
-    background-color: #fff; 
-    color: #212529; 
-    border-radius: 0.25rem;
-    box-sizing: border-box; 
+
+/* Informações do autor e data */
+.artigo-meta {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
 }
-.sugestao-form .btn-sugestao {
-    background-color: #0d6efd;
-    color: white;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0.25rem;
-    cursor: pointer;
-    margin-top: 0.5rem;
+
+/* O corpo da notícia: o mais importante! */
+.conteudo-noticia {
+    font-size: 1.125rem; /* 18px, ótimo para leitura */
+    line-height: 1.8; /* Espaçamento generoso entre linhas */
+    color: var(--color-text);
 }
-.sugestao-form .btn-sugestao:hover {
-    background-color: #0b5ed7;
+/* Estiliza parágrafos dentro do artigo */
+.conteudo-noticia p {
+    margin-bottom: 1.5rem;
 }
-.sugestao-form .error-message {
-    color: #dc3545; /* Vermelho para erros */
-    font-size: 0.9em;
-    margin-top: 0.5rem;
+/* Estiliza links dentro do artigo */
+.conteudo-noticia a {
+    color: var(--color-brand-primary);
+    text-decoration: underline;
+    font-weight: 700;
+}
+/* Estiliza imagens e outros elementos que podem vir do 'safe' */
+.conteudo-noticia img,
+.conteudo-noticia figure {
+    max-width: 100%;
+    height: auto;
+    margin: 2rem 0;
+    border-radius: var(--layout-border-radius);
+}
+
+/* --- 11. NOVAS CLASSES DE BOTÃO (REMOVER) --- */
+
+/* Botão Secundário (ex: "Remover") */
+.btn-danger {
+    background-color: var(--color-brand-secondary);
+    color: #fff;
+    border: 1px solid var(--color-brand-secondary);
+}
+.btn-danger:hover {
+    background-color: #bb2d3b; /* Vermelho mais escuro no hover */
+}
+
+/* Container para o botão de salvar */
+.artigo-acoes {
+    margin: 1rem 0;
+}
+
+/* Mensagem de "faça login para..." */
+.login-prompt {
+    font-size: 0.95rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid var(--color-border);
+    border-radius: var(--layout-border-radius);
+}
+
+/* Mensagens de feedback (agora dentro do artigo) */
+.messages-artigo {
+    margin: 0 0 1rem 0;
+    padding: 0;
+}
+
+
+/* --- 12. ESTILOS DA SEÇÃO DE COMENTÁRIOS --- */
+
+.secao-comentarios h2,
+.secao-comentarios h3 {
+    font-family: var(--font-serif);
+    margin-bottom: 1.5rem;
+}
+.secao-comentarios h2 {
+    font-size: 2rem; /* 32px */
+}
+.secao-comentarios h3 {
+    font-size: 1.5rem; /* 24px */
+    border-top: 1px solid var(--color-border);
+    padding-top: 1.5rem;
+}
+
+/* Formulário de novo comentário */
+.form-comentario {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+}
+.form-comentario textarea {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    padding: 0.75rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--layout-border-radius);
+    margin-bottom: 1rem;
+    min-height: 100px;
+}
+.form-comentario textarea:focus {
+    outline: none;
+    border-color: var(--color-brand-primary);
+    box-shadow: 0 0 0 3px rgba(10, 54, 157, 0.2);
+}
+.form-comentario button {
+    align-self: flex-start; /* Alinha o botão à esquerda */
+}
+
+/* Lista de comentários existentes */
+.lista-comentarios {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.comentario-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--layout-border-radius);
+    padding: 1.5rem;
+    background-color: var(--color-background);
+}
+.comentario-info {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+}
+.comentario-info strong {
+    color: var(--color-text);
+    font-size: 1rem;
+}
+.comentario-info .comentario-data {
+    color: #6c757d;
+    margin-left: 0.5rem;
+}
+.comentario-conteudo {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+/* --- 13. ESTILOS DE PÁGINAS AUXILIARES (PESQUISA, SALVOS) --- */
+
+/* Subtítulo usado em "Resultados da Pesquisa" e "Meus Salvos" */
+.page-subtitle {
+    font-size: 1.25rem; /* 20px */
+    font-family: var(--font-sans);
+    font-weight: 400;
+    color: #495057;
+    margin-top: -1.5rem; /* Puxa para mais perto do título */
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--color-border);
+    padding-bottom: 1rem;
+}
+
+/* Mensagem de "Nenhum resultado" */
+.empty-message {
+    font-size: 1.1rem;
+    color: #6c757d;
+    padding: 3rem;
+    text-align: center;
+    background-color: #f8f9fa;
+    border: 1px dashed var(--color-border);
+    border-radius: var(--layout-border-radius);
+    
+    /* Faz a mensagem ocupar toda a largura do grid */
+    grid-column: 1 / -1;
 }

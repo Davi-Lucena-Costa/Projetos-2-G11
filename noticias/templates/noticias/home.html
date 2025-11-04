@@ -1,15 +1,46 @@
 {% extends 'noticias/base.html' %}
+{% load static %}
 
 {% block content %}
-    <h2>Últimas Notícias</h2>
+<div class="container">
+    
+    <h1 class="page-title">Últimas Notícias</h1>
+
     <div class="noticias-container">
         {% for noticia in lista_de_noticias %}
-            <div class="noticia-card">
-                <h3><a href="{% url 'detalhe_noticia' noticia.id %}">{{ noticia.titulo }}</a></h3>
-                <p>Por: {{ noticia.autor.username }} em {{ noticia.data_publicacao|date:"d/m/Y" }}</p>
-            </div>
+            
+            <a href="{% url 'detalhe_noticia' noticia.id %}" class="noticia-card-link">
+                <article class="noticia-card">
+                    
+                    <h3>{{ noticia.titulo }}</h3>
+                    <p class="noticia-meta">
+                        Por: {{ noticia.autor.username }} em {{ noticia.data_publicacao|date:"d/m/Y" }}
+                    </p>
+                </article>
+            </a>
+
         {% empty %}
             <p>Nenhuma notícia foi cadastrada ainda.</p>
         {% endfor %}
     </div>
+
+    <hr class="section-divider">
+
+    <section class="sugestao-section">
+        <h2>Envie-nos uma sugestão</h2>
+        <p>Gostaria de ver uma nova funcionalidade? Tem uma ideia? Conte para nós!</p>
+        
+        <form action="{% url 'home' %}" method="POST" class="sugestao-form">
+            {% csrf_token %}
+            <textarea name="sugestao_texto" rows="3" placeholder="Sua sugestão...">{{ sugestao.texto_sugerido }}</textarea>
+            
+            {% if sugestao.erro %}
+                <p class="error-message">{{ sugestao.erro }}</p>
+            {% endif %}
+            
+            <button type="submit" name="sugestao_texto" class="btn btn-primary">Enviar Sugestão</button>
+        </form>
+    </section>
+
+</div>
 {% endblock %}
