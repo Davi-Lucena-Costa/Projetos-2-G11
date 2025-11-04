@@ -1,21 +1,29 @@
 {% extends 'noticias/base.html' %}
 
 {% block content %}
-    <h2>Resultados da Pesquisa</h2>
+<div class="container">
+    
+    <h1 class="page-title">Resultados da Pesquisa</h1>
 
     {% if termo %}
-        <p>Você pesquisou por: <strong>{{ termo }}</strong></p>
+        <p class="page-subtitle">Você pesquisou por: <strong>{{ termo }}</strong></p>
     {% endif %}
 
     <div class="noticias-container">
+        
         {% for noticia in resultados %}
-            <div class="noticia-card">
-                <h3><a href="{% url 'detalhe_noticia' noticia.id %}">{{ noticia.titulo }}</a></h3>
-                
-                <p>Por: {{ noticia.autor.username }} em {{ noticia.data_publicacao|date:"d/m/Y" }}</p>
-
-            </div>
-        {% empty %} <p>Nenhuma notícia encontrada para o termo pesquisado.</p>
+            <a href="{% url 'detalhe_noticia' noticia.id %}" class="noticia-card-link">
+                <article class="noticia-card">
+                    <h3>{{ noticia.titulo }}</h3>
+                    <p class="noticia-meta">
+                        Por: {{ noticia.autor.username }} em {{ noticia.data_publicacao|date:"d/m/Y" }}
+                    </p>
+                </article>
+            </a>
+        {% empty %}
+            <p class="empty-message">Nenhuma notícia encontrada para o termo pesquisado.</p>
         {% endfor %}
+
     </div>
+</div>
 {% endblock %}
