@@ -526,3 +526,110 @@ main {
     /* Faz a mensagem ocupar toda a largura do grid */
     grid-column: 1 / -1;
 }
+/* --- 14. ESTILOS DE ACESSIBILIDADE --- */
+
+/* Estilo para o container dos botões no header */
+.acessibilidade-controles {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem; /* 8px */
+}
+
+/* Estilo dos botões A-, A+, ◐ */
+.acessibilidade-controles button {
+    background-color: #f0f0f0;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+    font-weight: 700;
+    font-family: var(--font-sans);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%; /* Botões redondos */
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1; /* Centraliza o texto verticalmente */
+    transition: background-color 0.2s ease;
+}
+
+.acessibilidade-controles button:hover {
+    background-color: #e0e0e0;
+}
+
+/* Ajuste fino para o ícone de contraste */
+#alto-contraste {
+    font-size: 1.2rem;
+}
+
+/* --- ESTILOS DO MODO DE ALTO CONTRASTE --- */
+/* O JavaScript adiciona esta classe ao <body> */
+
+body.alto-contraste {
+    background-color: #000;
+    color: #fff;
+}
+
+/* Inverte a cor dos principais containers (cards, headers) */
+body.alto-contraste .site-header,
+body.alto-contraste .noticia-card,
+body.alto-contraste .artigo-principal,
+body.alto-contraste .sugestao-section,
+body.alto-contraste .comentario-card,
+body.alto-contraste .login-prompt,
+body.alto-contraste .empty-message {
+    background-color: #1a1a1a;
+    border-color: #555;
+    color: #fff;
+}
+
+/* Garante que os títulos fiquem brancos */
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste .logo a,
+body.alto-contraste .main-nav a,
+body.alto-contraste .comentario-info strong {
+    color: #fff;
+}
+
+/* Links em amarelo (alto contraste) */
+body.alto-contraste a {
+    color: #FFFF00; /* Amarelo brilhante */
+}
+
+/* Inverte botões */
+body.alto-contraste .btn-primary {
+    background-color: #FFFF00;
+    color: #000;
+    border-color: #FFFF00;
+}
+body.alto-contraste .btn-danger {
+    background-color: #FF4136; /* Vermelho brilhante */
+    color: #fff;
+}
+
+/* Inverte o rodapé */
+body.alto-contraste .site-footer {
+    background-color: #111;
+}
+
+/* Adapta os botões de acessibilidade ao modo de contraste */
+body.alto-contraste .acessibilidade-controles button {
+    background-color: #333;
+    border-color: #777;
+    color: #fff;
+}
+body.alto-contraste .acessibilidade-controles button:hover {
+    background-color: #555;
+}
+
+/* Adapta o formulário de pesquisa */
+body.alto-contraste .search-form input[type="text"] {
+    background-color: #333;
+    border-color: #777;
+    color: #fff;
+}
+body.alto-contraste .search-form .search-btn {
+    background-color: #222;
+    border-color: #777;
+    color: #fff;
+}

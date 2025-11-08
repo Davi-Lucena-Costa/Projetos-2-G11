@@ -21,13 +21,53 @@ document.addEventListener('DOMContentLoaded', () => {
             mainNav.classList.toggle('is-active');
             
             // 5. Atualiza o atributo 'aria-expanded' para acessibilidade
-            // (Isso diz aos leitores de tela se o menu está aberto ou fechado)
             const isExpanded = mainNav.classList.contains('is-active');
             navToggle.setAttribute('aria-expanded', isExpanded);
         });
     }
 
-    // Você pode adicionar mais interatividade aqui no futuro
-    // (Ex: Controles de acessibilidade A+/A-)
+    // --- NOVA LÓGICA DE ACESSIBILIDADE ---
+    
+    console.log("Carregando controles de acessibilidade...");
+    
+    // 1. Encontra os botões de controle
+    const btnAltoContraste = document.getElementById('alto-contraste');
+    const btnAumentarFonte = document.getElementById('aumentar-fonte');
+    const btnDiminuirFonte = document.getElementById('diminuir-fonte');
+    
+    // 2. Lógica do Alto Contraste
+    if (btnAltoContraste) {
+        btnAltoContraste.addEventListener('click', () => {
+            // Adiciona ou remove a classe 'alto-contraste' do <body>
+            document.body.classList.toggle('alto-contraste');
+            console.log("Modo de alto contraste alternado.");
+        });
+    }
 
-});
+    // 3. Lógica para Aumentar Fonte
+    if (btnAumentarFonte) {
+        btnAumentarFonte.addEventListener('click', () => {
+            // Pega o 'html' (elemento raiz)
+            const root = document.documentElement; 
+            // Pega o tamanho da fonte atual
+            let fontSize = parseFloat(window.getComputedStyle(root).fontSize);
+            // Aumenta em 1px (com um limite de 24px)
+            if (fontSize < 24) {
+                root.style.fontSize = (fontSize + 1) + 'px';
+            }
+        });
+    }
+
+    // 4. Lógica para Diminuir Fonte
+    if (btnDiminuirFonte) {
+        btnDiminuirFonte.addEventListener('click', () => {
+            const root = document.documentElement;
+            let fontSize = parseFloat(window.getComputedStyle(root).fontSize);
+            // Diminui em 1px (com um limite de 12px)
+            if (fontSize > 12) {
+                root.style.fontSize = (fontSize - 1) + 'px';
+            }
+        });
+    }
+
+}); 
