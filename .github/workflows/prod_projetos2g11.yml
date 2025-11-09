@@ -36,6 +36,9 @@ jobs:
       # se algum teste quebrar), o job 'build' falhará, 
       # e o job deploy needs: buold não será executado.
       - name: Run Django Automated Tests
+
+        env:
+          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
         run: |
           source antenv/bin/activate
           python manage.py test
@@ -83,3 +86,4 @@ jobs:
           slot-name: 'Production'
 
           
+
