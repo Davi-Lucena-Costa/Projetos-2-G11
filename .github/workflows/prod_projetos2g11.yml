@@ -62,9 +62,10 @@ jobs:
         with:
           name: python-app
           path: |
-            .
-            !venv/
-            !db.sqlite3
+            ${{ github.workspace }}/*
+            !${{ github.workspace }}/venv/
+            !${{ github.workspace }}/db.sqlite3
+
 
 
 
