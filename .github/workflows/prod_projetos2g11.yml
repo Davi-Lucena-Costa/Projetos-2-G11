@@ -62,9 +62,9 @@ jobs:
         with:
           name: python-app
           path: |
-          .
-          !venv/
-          !db.sqlite3
+            .
+            !venv/
+            !db.sqlite3
 
 
 
