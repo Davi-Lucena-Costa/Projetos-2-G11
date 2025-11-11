@@ -32,6 +32,8 @@
                     <li><a href="#">Esportes</a></li>
                     <li><a href="#">Política</a></li>
                     
+                    <li><a href="{% url 'pagina_radio' %}">Rádio</a></li>
+                    
                     {% if user.is_authenticated %}
                         <li><a href="{% url 'lista_salvos' %}">Meus Salvos</a></li>
                         <li><a href="{% url 'admin:logout' %}">Sair ({{ user.username }})</a></li>
