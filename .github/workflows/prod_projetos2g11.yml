@@ -62,11 +62,12 @@ jobs:
         with:
           name: python-app
           path: |
-            ${{ github.workspace }}/*
-            !${{ github.workspace }}/venv/
-            !${{ github.workspace }}/db.sqlite3
-
-
+            .
+            !venv/
+            !antenv/
+            !db.sqlite3
+            !**/__pycache__/
+            !**/*.pyc
 
 
       # 🚫 Opting Out of Oryx Build
