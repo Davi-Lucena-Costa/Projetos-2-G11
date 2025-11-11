@@ -1,28 +1,24 @@
+/* noticias/static/noticias/css/style.css */
+
 /* --- 1. CONFIGURAÇÃO GLOBAL E VARIÁVEIS --- */
 
-/* Importamos as fontes que pedimos no base.html */
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap');
 
-/* Usar variáveis CSS é a forma moderna de manter um design consistente.
-  Se quisermos mudar a cor principal do site, só precisamos mudar em um lugar.
-*/
 :root {
-    --font-serif: 'Merriweather', serif; /* Fonte "de jornal" para títulos */
-    --font-sans: 'Lato', sans-serif;       /* Fonte limpa para textos corridos */
+    --font-serif: 'Merriweather', serif; 
+    --font-sans: 'Lato', sans-serif; 
     
-    /* Paleta de Cores Profissional */
-    --color-background: #FFFFFF;         /* Fundo branco */
-    --color-text: #222222;               /* Preto suave (mais legível) */
-    --color-brand-primary: #0A369D;     /* Azul escuro (cor da marca, para confiança) */
-    --color-brand-secondary: #DC3545;   /* Vermelho (para botões de "remover") */
-    --color-border: #EAEAEA;             /* Cinza bem claro para bordas */
-    --color-footer-bg: #1a1a1a;         /* Fundo escuro para o rodapé */
+    --color-background: #FFFFFF; 
+    --color-text: #222222; 
+    --color-brand-primary: #0A369D; 
+    --color-brand-secondary: #DC3545; 
+    --color-border: #EAEAEA; 
+    --color-footer-bg: #1a1a1a; 
 
-    --layout-max-width: 1100px; /* Largura máxima do conteúdo */
+    --layout-max-width: 1100px;
     --layout-border-radius: 4px;
 }
 
-/* Um "Reset" simples para garantir consistência entre navegadores */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -35,14 +31,13 @@ body {
     background-color: var(--color-background);
     color: var(--color-text);
     line-height: 1.6;
-    font-size: 16px; /* Tamanho base */
+    font-size: 16px;
 }
 
-/* O container principal que limita a largura do conteúdo */
 .container {
     max-width: var(--layout-max-width);
     margin: 0 auto;
-    padding: 0 1rem; /* 1rem = 16px de espaçamento nas laterais */
+    padding: 0 1rem;
 }
 
 a {
@@ -114,7 +109,6 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--color-brand-primary);
 }
 
-/* Estilos do formulário de pesquisa no cabeçalho */
 .search-form {
     display: flex;
 }
@@ -139,7 +133,6 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #eee;
 }
 
-/* Botão de Menu Mobile (escondido por padrão) */
 .nav-toggle {
     display: none;
     background: none;
@@ -150,14 +143,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- 5. CONTEÚDO PRINCIPAL E RODAPÉ --- */
 main {
-    /* O container é aplicado dentro do <main> no base.html */
-    min-height: 60vh; /* Garante que o rodapé fique lá embaixo */
+    min-height: 60vh;
     padding: 2rem 0;
 }
 
 .site-footer {
     background-color: var(--color-footer-bg);
-    color: #a0a0a0; /* Cinza claro para o texto do rodapé */
+    color: #a0a0a0;
     padding: 2rem 0;
     margin-top: 2rem;
     font-size: 0.9rem;
@@ -168,7 +160,6 @@ main {
 
 /* --- 6. ESTILOS DE MENSAGENS E BOTÕES --- */
 
-/* Container das mensagens de feedback */
 .messages-container {
     max-width: var(--layout-max-width);
     margin: 1rem auto -1rem auto;
@@ -182,37 +173,30 @@ main {
     font-weight: 700;
 }
 .message.success {
-    background-color: #198754; /* Verde sucesso */
+    background-color: #198754;
 }
 .message.error {
-    background-color: var(--color-brand-secondary); /* Vermelho erro */
+    background-color: var(--color-brand-secondary);
 }
 
 /* --- 7. DESIGN RESPONSIVO (MOBILE) --- */
 @media (max-width: 800px) {
     .header-container {
-        /* Permite que o logo e o botão fiquem em lados opostos */
         flex-wrap: wrap; 
     }
-
-    /* Mostra o botão hambúrguer */
     .nav-toggle {
         display: block;
     }
-
-    /* Esconde a navegação */
     .main-nav {
         display: none;
-        width: 100%; /* Ocupa a largura total quando aberto */
+        width: 100%;
         margin-top: 1rem;
     }
     .main-nav ul {
-        flex-direction: column; /* Empilha os itens do menu */
+        flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
     }
-    
-    /* Classe que o JavaScript vai adicionar para ABRIR o menu */
     .main-nav.is-active {
         display: block;
     }
@@ -220,7 +204,7 @@ main {
 /* --- 8. ESTILOS DA HOME (GRID DE NOTÍCIAS) --- */
 
 .page-title {
-    font-size: 2.5rem; /* 40px */
+    font-size: 2.5rem;
     border-bottom: 2px solid var(--color-brand-primary);
     padding-bottom: 0.5rem;
     margin-bottom: 2rem;
@@ -228,13 +212,8 @@ main {
 
 .noticias-container {
     display: grid;
-    /* Cria colunas responsivas:
-       - Tenta criar colunas de no mínimo 300px.
-       - Se houver espaço, elas crescem (1fr) para preencher.
-       - 'auto-fill' cria quantas colunas couberem.
-    */
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem; /* 24px de espaço entre os cards */
+    gap: 1.5rem;
 }
 
 .noticia-card {
@@ -242,40 +221,36 @@ main {
     border: 1px solid var(--color-border);
     border-radius: var(--layout-border-radius);
     padding: 1.5rem;
-    height: 100%; /* Faz todos os cards terem a mesma altura */
+    height: 100%;
     display: flex;
     flex-direction: column;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 }
 
-/* Transforma o <a> em um bloco para o card inteiro ser clicável */
 .noticia-card-link {
     text-decoration: none;
-    color: inherit; /* Herda a cor do texto padrão */
+    color: inherit;
 }
 .noticia-card-link:hover .noticia-card {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
-/* Título do card (usando a fonte de jornal) */
 .noticia-card h3 {
     font-family: var(--font-serif);
-    font-size: 1.35rem; /* 21.6px */
+    font-size: 1.35rem;
     color: var(--color-text);
     margin-bottom: 0.5rem;
 }
 
-/* Texto de "Por: Autor..." */
 .noticia-meta {
-    font-size: 0.85rem; /* 13.6px */
-    color: #6c757d; /* Cinza para informações secundárias */
-    margin-top: auto; /* Truque de Flexbox: empurra isso para o final do card */
+    font-size: 0.85rem;
+    color: #6c757d;
+    margin-top: auto;
     padding-top: 1rem;
 }
 
-/* Divisor de seção (para separar o grid da sugestão) */
 .section-divider {
     border-top: 3px solid var(--color-border);
     margin: 3rem 0;
@@ -285,9 +260,9 @@ main {
 
 .sugestao-section {
     max-width: 600px;
-    margin: 2rem auto; /* Centraliza a seção */
+    margin: 2rem auto;
     padding: 2rem;
-    background-color: #f8f9fa; /* Um fundo levemente cinza */
+    background-color: #f8f9fa;
     border: 1px solid var(--color-border);
     border-radius: var(--layout-border-radius);
     text-align: center;
@@ -314,10 +289,9 @@ main {
 .sugestao-form textarea:focus {
     outline: none;
     border-color: var(--color-brand-primary);
-    box-shadow: 0 0 0 3px rgba(10, 54, 157, 0.2); /* Sombra de foco azul */
+    box-shadow: 0 0 0 3px rgba(10, 54, 157, 0.2);
 }
 
-/* Classe de botão genérica */
 .btn {
     display: inline-block;
     font-family: var(--font-sans);
@@ -332,13 +306,12 @@ main {
     text-decoration: none !important;
 }
 
-/* Botão Primário (Azul) */
 .btn-primary {
     background-color: var(--color-brand-primary);
     color: #fff;
 }
 .btn-primary:hover {
-    background-color: #082a7a; /* Um azul mais escuro no hover */
+    background-color: #082a7a;
 }
 
 .sugestao-form .error-message {
@@ -349,23 +322,20 @@ main {
 
 /* --- 10. ESTILOS DA PÁGINA DE ARTIGO (DETALHE) --- */
 
-/* Cria o "container de leitura" mais estreito e centralizado */
 .artigo-principal,
 .secao-comentarios {
-    max-width: 740px; /* Largura ideal para leitura */
+    max-width: 740px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* O título do artigo: grande e com a fonte de jornal */
 .artigo-header h1 {
     font-family: var(--font-serif);
-    font-size: 2.8rem; /* 44.8px */
+    font-size: 2.8rem;
     line-height: 1.2;
     margin-bottom: 1rem;
 }
 
-/* Informações do autor e data */
 .artigo-meta {
     font-family: var(--font-sans);
     font-size: 0.95rem;
@@ -373,23 +343,19 @@ main {
     margin-bottom: 1.5rem;
 }
 
-/* O corpo da notícia: o mais importante! */
 .conteudo-noticia {
-    font-size: 1.125rem; /* 18px, ótimo para leitura */
-    line-height: 1.8; /* Espaçamento generoso entre linhas */
+    font-size: 1.125rem;
+    line-height: 1.8;
     color: var(--color-text);
 }
-/* Estiliza parágrafos dentro do artigo */
 .conteudo-noticia p {
     margin-bottom: 1.5rem;
 }
-/* Estiliza links dentro do artigo */
 .conteudo-noticia a {
     color: var(--color-brand-primary);
     text-decoration: underline;
     font-weight: 700;
 }
-/* Estiliza imagens e outros elementos que podem vir do 'safe' */
 .conteudo-noticia img,
 .conteudo-noticia figure {
     max-width: 100%;
@@ -400,22 +366,19 @@ main {
 
 /* --- 11. NOVAS CLASSES DE BOTÃO (REMOVER) --- */
 
-/* Botão Secundário (ex: "Remover") */
 .btn-danger {
     background-color: var(--color-brand-secondary);
     color: #fff;
     border: 1px solid var(--color-brand-secondary);
 }
 .btn-danger:hover {
-    background-color: #bb2d3b; /* Vermelho mais escuro no hover */
+    background-color: #bb2d3b;
 }
 
-/* Container para o botão de salvar */
 .artigo-acoes {
     margin: 1rem 0;
 }
 
-/* Mensagem de "faça login para..." */
 .login-prompt {
     font-size: 0.95rem;
     padding: 1rem;
@@ -424,7 +387,6 @@ main {
     border-radius: var(--layout-border-radius);
 }
 
-/* Mensagens de feedback (agora dentro do artigo) */
 .messages-artigo {
     margin: 0 0 1rem 0;
     padding: 0;
@@ -439,15 +401,14 @@ main {
     margin-bottom: 1.5rem;
 }
 .secao-comentarios h2 {
-    font-size: 2rem; /* 32px */
+    font-size: 2rem;
 }
 .secao-comentarios h3 {
-    font-size: 1.5rem; /* 24px */
+    font-size: 1.5rem;
     border-top: 1px solid var(--color-border);
     padding-top: 1.5rem;
 }
 
-/* Formulário de novo comentário */
 .form-comentario {
     display: flex;
     flex-direction: column;
@@ -468,10 +429,9 @@ main {
     box-shadow: 0 0 0 3px rgba(10, 54, 157, 0.2);
 }
 .form-comentario button {
-    align-self: flex-start; /* Alinha o botão à esquerda */
+    align-self: flex-start;
 }
 
-/* Lista de comentários existentes */
 .lista-comentarios {
     display: flex;
     flex-direction: column;
@@ -501,19 +461,17 @@ main {
 }
 /* --- 13. ESTILOS DE PÁGINAS AUXILIARES (PESQUISA, SALVOS) --- */
 
-/* Subtítulo usado em "Resultados da Pesquisa" e "Meus Salvos" */
 .page-subtitle {
-    font-size: 1.25rem; /* 20px */
+    font-size: 1.25rem;
     font-family: var(--font-sans);
     font-weight: 400;
     color: #495057;
-    margin-top: -1.5rem; /* Puxa para mais perto do título */
+    margin-top: -1.5rem;
     margin-bottom: 2rem;
     border-bottom: 1px solid var(--color-border);
     padding-bottom: 1rem;
 }
 
-/* Mensagem de "Nenhum resultado" */
 .empty-message {
     font-size: 1.1rem;
     color: #6c757d;
@@ -523,19 +481,16 @@ main {
     border: 1px dashed var(--color-border);
     border-radius: var(--layout-border-radius);
     
-    /* Faz a mensagem ocupar toda a largura do grid */
     grid-column: 1 / -1;
 }
 /* --- 14. ESTILOS DE ACESSIBILIDADE --- */
 
-/* Estilo para o container dos botões no header */
 .acessibilidade-controles {
     display: flex;
     align-items: center;
     gap: 0.5rem; /* 8px */
 }
 
-/* Estilo dos botões A-, A+, ◐ */
 .acessibilidade-controles button {
     background-color: #f0f0f0;
     border: 1px solid var(--color-border);
@@ -544,10 +499,10 @@ main {
     font-family: var(--font-sans);
     width: 30px;
     height: 30px;
-    border-radius: 50%; /* Botões redondos */
+    border-radius: 50%;
     cursor: pointer;
     font-size: 0.9rem;
-    line-height: 1; /* Centraliza o texto verticalmente */
+    line-height: 1;
     transition: background-color 0.2s ease;
 }
 
@@ -555,20 +510,17 @@ main {
     background-color: #e0e0e0;
 }
 
-/* Ajuste fino para o ícone de contraste */
 #alto-contraste {
     font-size: 1.2rem;
 }
 
 /* --- ESTILOS DO MODO DE ALTO CONTRASTE --- */
-/* O JavaScript adiciona esta classe ao <body> */
 
 body.alto-contraste {
     background-color: #000;
     color: #fff;
 }
 
-/* Inverte a cor dos principais containers (cards, headers) */
 body.alto-contraste .site-header,
 body.alto-contraste .noticia-card,
 body.alto-contraste .artigo-principal,
@@ -581,7 +533,6 @@ body.alto-contraste .empty-message {
     color: #fff;
 }
 
-/* Garante que os títulos fiquem brancos */
 body.alto-contraste h1,
 body.alto-contraste h2,
 body.alto-contraste h3,
@@ -591,28 +542,24 @@ body.alto-contraste .comentario-info strong {
     color: #fff;
 }
 
-/* Links em amarelo (alto contraste) */
 body.alto-contraste a {
-    color: #FFFF00; /* Amarelo brilhante */
+    color: #FFFF00;
 }
 
-/* Inverte botões */
 body.alto-contraste .btn-primary {
     background-color: #FFFF00;
     color: #000;
     border-color: #FFFF00;
 }
 body.alto-contraste .btn-danger {
-    background-color: #FF4136; /* Vermelho brilhante */
+    background-color: #FF4136;
     color: #fff;
 }
 
-/* Inverte o rodapé */
 body.alto-contraste .site-footer {
     background-color: #111;
 }
 
-/* Adapta os botões de acessibilidade ao modo de contraste */
 body.alto-contraste .acessibilidade-controles button {
     background-color: #333;
     border-color: #777;
@@ -622,7 +569,6 @@ body.alto-contraste .acessibilidade-controles button:hover {
     background-color: #555;
 }
 
-/* Adapta o formulário de pesquisa */
 body.alto-contraste .search-form input[type="text"] {
     background-color: #333;
     border-color: #777;
@@ -632,4 +578,85 @@ body.alto-contraste .search-form .search-btn {
     background-color: #222;
     border-color: #777;
     color: #fff;
+}
+
+/* --- 15. ESTILOS DA PÁGINA DE RÁDIO --- */
+/* Esta seção é nova e usa suas variáveis existentes */
+
+/* Container para o player */
+.radio-player-wrapper {
+    max-width: 740px;
+    margin: 0 auto 2rem auto;
+    padding: 2rem;
+    background-color: #f8f9fa; 
+    border: 1px solid var(--color-border);
+    border-radius: var(--layout-border-radius);
+}
+.radio-player-wrapper h3 {
+    font-family: var(--font-sans);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #495057;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* Player de áudio */
+.radio-player {
+    width: 100%;
+    margin-top: 1rem;
+    border-radius: 50px;
+    border: 1px solid var(--color-border);
+}
+
+/* Container para a grade de programação */
+.programacao-wrapper {
+    max-width: 960px; 
+    margin: 0 auto;
+}
+
+.programacao-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem; 
+}
+
+/* Estilo de cada item da programação */
+.programa-item {
+    display: flex;
+    align-items: center;
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: var(--layout-border-radius);
+    padding: 1rem 1.5rem;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); 
+}
+
+.programa-horario {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    color: var(--color-brand-primary);
+    font-size: 1.1rem;
+    flex-basis: 120px; 
+    flex-shrink: 0;
+}
+
+.programa-detalhes {
+    flex-grow: 1;
+    padding-left: 1.5rem;
+    border-left: 1px solid var(--color-border);
+}
+
+.programa-nome {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+}
+
+.programa-apresentador {
+    font-size: 0.95rem;
+    color: #6c757d;
+    font-style: italic;
 }

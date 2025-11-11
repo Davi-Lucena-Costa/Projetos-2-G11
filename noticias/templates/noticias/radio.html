@@ -1,0 +1,42 @@
+{% extends 'noticias/base.html' %}
+
+{% block title %}Rádio Jornal Ao Vivo | {{ block.super }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="page-title">Rádio Jornal Ao Vivo</h2>
+
+    <section class="radio-player-wrapper">
+        <h3>Ouvir Agora</h3>
+        <audio controls class="radio-player">
+            <source src="https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_JORNAL.mp3" type="audio/mpeg">
+            Seu navegador não suporta o player de áudio.
+        </audio>
+    </section>
+
+    <hr class="section-divider">
+
+    <section class="programacao-wrapper">
+        <h2 class="page-title">Programação do Dia</h2>
+
+        <div class="programacao-lista">
+            {% for programa in programacao %}
+                <div class="programa-item">
+                    <div class="programa-horario">
+                        {{ programa.horario_inicio|time:"H:i" }}
+                    </div>
+                    <div class="programa-detalhes">
+                        <h4 class="programa-nome">{{ programa.nome_programa }}</h4>
+                        {% if programa.apresentador %}
+                            <p class="programa-apresentador">com {{ programa.apresentador }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+            {% empty %}
+                <p class="empty-message">A programação de hoje ainda não foi cadastrada.</p>
+            {% endfor %}
+        </div>
+    </section>
+
+</div>
+{% endblock %}
