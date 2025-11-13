@@ -1,11 +1,10 @@
-# Este é o pipeline de CI/CD para o projeto Django
 name: Build and Deploy to Azure Web App
 
 on:
   push:
     branches:
-      - prod  # Executa quando você dá 'push' para a branch 'prod'
-  workflow_dispatch: # Permite executar manualmente pela aba 'Actions'
+      - prod
+  workflow_dispatch:
 
 jobs:
   build:
@@ -58,7 +57,7 @@ jobs:
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build # Só executa se o job 'build' (incluindo os testes) passar
+    needs: build 
     permissions:
       id-token: write
       contents: read
@@ -82,3 +81,5 @@ jobs:
       with:
         app-name: 'Projetos2G11'
         slot-name: 'Production'
+
+        startup-command: 'python manage.py migrate && gunicorn --bind=0.0.0.0 --timeout 600 projetos_2_g11.wsgi'
