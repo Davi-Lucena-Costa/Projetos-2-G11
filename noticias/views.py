@@ -45,17 +45,21 @@ def home(request):
 
 def pesquisar_noticias(request):
     termo = request.GET.get('q', '').strip()
-    resultados = []
 
-    if termo:
-        nova_pesquisa = Pesquisa(termo_buscado=termo)
-        if request.user.is_authenticated:
-            nova_pesquisa.usuario = request.user
-        nova_pesquisa.save()
+    # Se estiver vazio, dá feedback e volta pra home
+    if not termo:
+        messages.error(request, "Digite algo para pesquisar.")
+        return redirect('home')
 
-        resultados = Noticia.objects.filter(
-            Q(titulo__icontains=termo) | Q(conteudo__icontains=termo)
-        ).distinct().order_by('-data_publicacao')
+    # Se tiver termo, salva e busca normalmente
+    nova_pesquisa = Pesquisa(termo_buscado=termo)
+    if request.user.is_authenticated:
+        nova_pesquisa.usuario = request.user
+    nova_pesquisa.save()
+
+    resultados = Noticia.objects.filter(
+        Q(titulo__icontains=termo) | Q(conteudo__icontains=termo)
+    ).distinct().order_by('-data_publicacao')
 
     contexto = { 'termo': termo, 'resultados': resultados }
     return render(request, 'noticias/pesquisa.html', contexto)
