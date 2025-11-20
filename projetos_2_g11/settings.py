@@ -20,15 +20,17 @@ SECRET_KEY = os.getenv(
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'projetos2g11-bxbscea3eyatdncb.brazilsouth-01.azurewebsites.net'
+    'projetos2g11.onrender.com',
 ]
 
-# Banco de dados (somente SQLite)
+# Banco de dados (PostgreSQL via DATABASE_URL do Render)
+import dj_database_url
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/home/site/wwwroot/db.sqlite3',
-    }
+    'default': dj_database_url.parse(
+        os.getenv("DATABASE_URL"),
+        conn_max_age=600,
+        conn_health_checks=True
+    )
 }
 
 # Apps instalados
@@ -98,7 +100,6 @@ STATICFILES_DIRS = [
     # os.path.join(BASE_DIR, 'static')
 ]
 
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
@@ -106,7 +107,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # No final de projetos_2_g11/settings.py
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://projetos2g11-bxbscea3eyatdncb.brazilsouth-01.azurewebsites.net",
+    "https://projetos2g11.onrender.com",
 ]
 
 LOGIN_REDIRECT_URL = '/'
