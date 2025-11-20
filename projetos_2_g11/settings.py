@@ -35,6 +35,7 @@ DATABASES = {
 
 # Apps instalados
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +46,7 @@ INSTALLED_APPS = [
     # Sua aplicação principal
     'noticias',
     
-    'whitenoise.runserver_nostatic',
+    
 
 ]
 
