@@ -20,7 +20,7 @@ SECRET_KEY = os.getenv(
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'projetos2g11.onrender.com',
+    'projetos-2-g11.onrender.com',
 ]
 
 # Banco de dados (PostgreSQL via DATABASE_URL do Render)
@@ -107,7 +107,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # No final de projetos_2_g11/settings.py
 
 CSRF_TRUSTED_ORIGINS = [
-    "https://projetos2g11.onrender.com",
+    "https://projetos-2-g11.onrender.com",
 ]
 
 LOGIN_REDIRECT_URL = '/'
