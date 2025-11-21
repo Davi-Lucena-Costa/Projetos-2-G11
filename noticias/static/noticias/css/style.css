@@ -1,5 +1,3 @@
-/* noticias/static/noticias/css/style.css */
-
 /* --- 1. CONFIGURAÇÃO GLOBAL E VARIÁVEIS --- */
 
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap');
@@ -657,6 +655,68 @@ body.alto-contraste .search-form .search-btn {
 
 .programa-apresentador {
     font-size: 0.95rem;
-    color: #6c757d;
+    color: #6c757d; /* Erro 'Gcolor' corrigido aqui */
     font-style: italic;
+}
+
+/* --- 16. MODO DE LEITURA SIMPLIFICADO --- */
+
+/* Botão Secundário (cinza/outline) */
+.btn-secondary {
+    background-color: transparent;
+    color: #555;
+    border: 1px solid #ccc; /* Cor um pouco mais escura que a borda padrão */
+    padding: 0.5rem 1rem; /* Um pouco menor que o .btn */
+    font-size: 0.9rem;
+}
+.btn-secondary:hover {
+    background-color: #f8f9fa;
+    border-color: #bbb;
+}
+
+/* Container do botão na página do artigo */
+.artigo-controles {
+    margin-top: 1.5rem;
+}
+
+/* O que acontece quando o Modo Leitura está ATIVO */
+
+/* 1. Esconde tudo que distrai */
+body.modo-leitura-ativo .site-header,
+body.modo-leitura-ativo .site-footer,
+body.modo-leitura-ativo .secao-comentarios,
+body.modo-leitura-ativo .artigo-acoes,
+body.modo-leitura-ativo .artigo-principal > hr,
+body.modo-leitura-ativo .messages-container {
+    display: none;
+}
+
+/* 2. Expande o artigo principal para focar */
+body.modo-leitura-ativo .artigo-principal {
+    max-width: none; 
+    margin-top: 1rem;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+}
+
+/* 3. Centraliza o botão de "Sair" e o mantém fixo */
+body.modo-leitura-ativo .artigo-controles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    background: var(--color-background);
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-top: 0;
+}
+
+/* 4. Ajusta o topo do artigo para não ficar atrás do botão fixo */
+body.modo-leitura-ativo .artigo-header {
+    margin-top: 5rem; /* 1rem de padding + altura do botão */
 }

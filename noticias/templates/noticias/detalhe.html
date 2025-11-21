@@ -18,6 +18,13 @@
             <p class="artigo-meta">
                 Por: {{ noticia.autor.username }} em {{ noticia.data_publicacao|date:"d/m/Y H:i" }}
             </p>
+
+            <div class="artigo-controles">
+                <button id="btn-modo-leitura" class="btn btn-secondary" aria-label="Ativar modo de leitura simplificado" aria-pressed="false">
+                    📖 Modo Leitura
+                </button>
+            </div>
+            
         </header>
 
         <hr>
@@ -40,7 +47,7 @@
                     {% endif %}
                 </form>
             {% else %}
-                <p class_login-prompt"><a href="{% url 'admin:login' %}?next={{ request.path }}">Faça login</a> para salvar esta notícia.</p>
+                <p class="login-prompt"><a href="{% url 'admin:login' %}?next={{ request.path }}">Faça login</a> para salvar esta notícia.</p>
             {% endif %}
         </div>
     </article>

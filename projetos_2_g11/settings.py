@@ -23,11 +23,18 @@ ALLOWED_HOSTS = [
     'projetos2g11-bxbscea3eyatdncb.brazilsouth-01.azurewebsites.net'
 ]
 
-# Banco de dados (somente SQLite)
+# Configuração inteligente do Banco de Dados
+if TARGET_ENV == 'prod':
+    # Se estiver na Azure, usa o caminho do servidor Linux
+    DB_NAME = '/home/site/wwwroot/db.sqlite3'
+else:
+    # Se estiver no seu Windows, usa a pasta do projeto
+    DB_NAME = BASE_DIR / 'db.sqlite3'
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': '/home/site/wwwroot/db.sqlite3',
+        'NAME': DB_NAME,
     }
 }
 

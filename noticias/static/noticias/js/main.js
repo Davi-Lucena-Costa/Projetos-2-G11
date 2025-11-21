@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- NOVA LÓGICA DE ACESSIBILIDADE ---
+    // --- LÓGICA DE ACESSIBILIDADE (GLOBAL) ---
     
     console.log("Carregando controles de acessibilidade...");
     
@@ -70,4 +70,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-}); 
+    // --- NOVA LÓGICA DO MODO LEITURA (APENAS PÁGINA DO ARTIGO) ---
+
+    // 1. Encontra o botão (ele só existe no detalhe.html)
+    const btnModoLeitura = document.getElementById('btn-modo-leitura');
+
+    // 2. Se o botão existir nesta página, adiciona o "ouvinte"
+    if (btnModoLeitura) {
+        console.log("Modo Leitura disponível nesta página.");
+
+        btnModoLeitura.addEventListener('click', () => {
+            // 3. Adiciona ou remove a classe principal no <body>
+            document.body.classList.toggle('modo-leitura-ativo');
+
+            // 4. Verifica se o modo está ativo
+            const isAtivo = document.body.classList.contains('modo-leitura-ativo');
+
+            // 5. Atualiza o texto e o estado do botão
+            if (isAtivo) {
+                btnModoLeitura.textContent = 'Sair do Modo Leitura';
+                btnModoLeitura.setAttribute('aria-pressed', 'true');
+            } else {
+                btnModoLeitura.textContent = '📖 Modo Leitura';
+                btnModoLeitura.setAttribute('aria-pressed', 'false');
+            }
+        });
+    }
+
+}); // FIM do 'DOMContentLoaded'
