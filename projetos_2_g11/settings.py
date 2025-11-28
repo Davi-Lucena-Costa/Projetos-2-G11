@@ -9,7 +9,7 @@ load_dotenv(BASE_DIR / '.env')
 TARGET_ENV = os.getenv('TARGET_ENV', 'dev')
 
 # Ativa modo debug se não for produção
-DEBUG = not TARGET_ENV.lower().startswith('prod')
+DEBUG = True
 
 # Chave secreta 
 SECRET_KEY = os.getenv(
