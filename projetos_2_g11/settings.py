@@ -5,13 +5,11 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
 
-# Ambiente (dev, prod etc.)
 TARGET_ENV = os.getenv('TARGET_ENV', 'dev')
 
 # Ativa modo debug se não for produção
 DEBUG = True
 
-# Chave secreta 
 SECRET_KEY = os.getenv(
     'SECRET_KEY',
     'django-insecure-g1qu$9_0vz4^!9gdp00eqdztm1p#rf!gpikrc0diz)22pf3!ub'
@@ -33,7 +31,6 @@ DATABASES = {
     )
 }
 
-# Apps instalados
 INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django.contrib.admin',
@@ -42,15 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
-    # Sua aplicação principal
     'noticias',
-    
-    
-
+    'whitenoise.runserver_nostatic',
 ]
 
-# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -81,7 +73,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'projetos_2_g11.wsgi.application'
 
-# Validação de senha
 AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
     {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
@@ -105,8 +96,6 @@ STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# No final de projetos_2_g11/settings.py
-
 WHITENOISE_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 CSRF_TRUSTED_ORIGINS = [
@@ -114,3 +103,5 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/accounts/login/'
