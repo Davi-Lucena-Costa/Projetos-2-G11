@@ -38,7 +38,7 @@ Abra o seu terminal (Git Bash ou PowerShell) e rode:
 git clone [https://github.com/Davi-Lucena-Costa/Projetos-2-G11.git](https://github.com/Davi-Lucena-Costa/Projetos-2-G11.git)
 cd Projetos-2-G11
 
-# 3. Criar e Ativar o Ambiente Virtual (Venv)
+# Criar e Ativar o Ambiente Virtual (Venv)
 No Windows (PowerShell):
 
 # Cria a pasta 'venv'
@@ -48,13 +48,13 @@ python -m venv venv
 .\venv\Scripts\activate
 
 
-# 4. Instalar Dependências
+# Instalar Dependências
 Com o ambiente virtual ativo, instale todas as bibliotecas necessárias (Django e demais dependências):
 
 pip install -r requirements.txt
 
 
-# 5. Configurar o Banco de Dados
+# Configurar o Banco de Dados
 
 Crie as tabelas necessárias no banco local (SQLite):
 
@@ -64,7 +64,7 @@ python manage.py migrate
 
 python manage.py createsuperuser
 
-# 6. Rodar o Projeto 🚀
+# Rodar o Projeto 🚀
 
 Agora basta iniciar o servidor local:
 
