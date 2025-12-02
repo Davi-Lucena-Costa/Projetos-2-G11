@@ -17,7 +17,7 @@ Este projeto tem como objetivo **conquistar a fidelidade dos clientes do Jornal 
 
 ### 📊 Backlog do Projeto
 
-![Backlog do Projeto com histórias concluídas](https://raw.githubusercontent.com/Bernalencouto/Projetos-2-G11/main/imagens/Backlogconcluido.png)
+![Backlog do Projeto com histórias concluídas](https://raw.githubusercontent.com/Bernalencouto/Projetos-2-G11/main/imagens/jira.png)
 
 ---
 
