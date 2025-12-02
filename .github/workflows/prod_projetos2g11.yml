@@ -53,7 +53,6 @@ jobs:
         path: |
           ${{ github.workspace }}
           !${{ github.workspace }}/venv/
-          !${{ github.workspace }}/db.sqlite3
 
   deploy:
     runs-on: ubuntu-latest
@@ -75,11 +74,10 @@ jobs:
         tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_8ADB97B1F9E24A6599A8E4E144482464 }}
         subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_B895A88D5C014B05BA5CA0CE2E3CA3F2 }}
 
-    - name: 'Deploy to Azure Web App'
+    - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v3
       id: deploy-to-webapp
       with:
         app-name: 'Projetos2G11'
         slot-name: 'Production'
-
         startup-command: 'python manage.py migrate && gunicorn --bind=0.0.0.0 --timeout 600 projetos_2_g11.wsgi'
