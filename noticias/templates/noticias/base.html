@@ -20,45 +20,52 @@
         <div class="container header-container">
             
             <h1 class="logo">
-                <a href="{% url 'home' %}">Jornal do Commercio</a>
+                <a href="{% url 'home' %}">
+                    <img src="{% static 'noticias/img/logo.svg' %}" alt="Jornal do Commercio">
+                </a>
             </h1>
 
-            <button class="nav-toggle" aria-label="Abrir menu" aria-expanded="false">
-                &#9776; </button>
+            <form method="get" action="{% url 'pesquisar_noticias' %}" class="search-form">
+                <input type="text" name="q" placeholder="Pesquisar..." value="{{ request.GET.q|default:'' }}" aria-label="Pesquisar">
+                <button type="submit" class="search-btn" aria-label="Buscar">🔍</button>
+            </form>
 
-            <nav class="main-nav" id="main-nav">
-                <ul>
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="#">Esportes</a></li>
-                    <li><a href="#">Política</a></li>
-                    
-                    <li><a href="{% url 'pagina_radio' %}">Rádio</a></li>
-                    
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'lista_salvos' %}">Meus Salvos</a></li>
-                        <li><a href="{% url 'admin:logout' %}">Sair ({{ user.username }})</a></li>
-                    {% else %}
-                        <li><a href="{% url 'login' %}">Login</a></li>
-                    {% endif %}
-                    
-                    <li class="nav-item-acessibilidade">
-                        <div class="acessibilidade-controles">
-                            <button id="diminuir-fonte" aria-label="Diminuir fonte" title="Diminuir fonte">A-</button>
-                            <button id="aumentar-fonte" aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
-                            <button id="alto-contraste" aria-label="Modo de alto contraste" title="Modo de Alto Contraste">◐</button>
-                        </div>
-                    </li>
-                    
-                    <li>
-                        <form method="get" action="{% url 'pesquisar_noticias' %}" class="search-form">
-                            <input type="text" name="q" placeholder="Pesquisar..." value="{{ request.GET.q|default:'' }}" aria-label="Pesquisar">
-                            <button type="submit" class="search-btn" aria-label="Buscar">🔍</button>
-                        </form>
-                    </li>
-                </ul>
-            </nav>
+            <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+                <img src="{% static 'noticias/img/icon-menu.svg' %}" alt="Menu">
+            </button>
         </div>
     </header>
+
+    <div class="header-divider"></div>
+
+    <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
+
+    <nav class="main-nav" id="main-nav" aria-hidden="true">
+        <div class="container">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="#">Esportes</a></li>
+                <li><a href="#">Política</a></li>
+                
+                <li><a href="{% url 'pagina_radio' %}">Rádio</a></li>
+                
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'lista_salvos' %}">Meus Salvos</a></li>
+                    <li><a href="{% url 'admin:logout' %}">Sair ({{ user.username }})</a></li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+                
+                <li class="nav-item-acessibilidade">
+                    <div class="acessibilidade-controles">
+                        <button id="diminuir-fonte" aria-label="Diminuir fonte" title="Diminuir fonte">A-</button>
+                        <button id="aumentar-fonte" aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
+                        <button id="alto-contraste" aria-label="Modo de alto contraste" title="Modo de Alto Contraste">◐</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     {% if messages %}
         <div class="messages-container">

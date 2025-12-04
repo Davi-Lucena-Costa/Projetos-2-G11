@@ -74,14 +74,16 @@ h1, h2, h3, h4, h5, h6 {
 .site-header {
     width: 100%;
     background-color: var(--color-background);
-    border-bottom: 1px solid var(--color-border);
     padding: 1rem 0;
 }
 
 .header-container {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    gap: 0.5rem;
+    position: relative;
 }
 
 .logo a {
@@ -91,25 +93,77 @@ h1, h2, h3, h4, h5, h6 {
     text-decoration: none;
 }
 
+.logo img {
+    height: 80px;
+    width: auto;
+    display: block;
+    max-width: 300px;
+    object-fit: contain;
+}
+
 .main-nav ul {
     list-style: none;
     display: flex;
     align-items: center;
-    gap: 1.5rem; /* Espaço entre os itens do menu */
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 .main-nav a {
+    display: inline-block;
     font-family: var(--font-sans);
     font-weight: 700;
-    color: var(--color-text);
+    color: #fff;
     text-decoration: none;
-    font-size: 0.9rem; /* 14.4px */
-    text-transform: uppercase;
+    font-size: 0.95rem;
+    text-transform: none;
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
+    background: linear-gradient(#dc3545, #b11f2f);
+    border: 2px solid #a61b2b;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.18), inset 0 -6px 12px rgba(255,255,255,0.04);
+    text-shadow: 0 1px 0 rgba(0,0,0,0.12);
+    transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+/* separador entre logo e navegação */
+.main-nav {
+    width: 100%;
+    padding: 0.75rem 0;
+    margin: 0;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.header-divider {
+    width: 100vw;
+    height: 1px;
+    background-color: var(--color-border);
+    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
 }
 .main-nav a:hover {
-    color: var(--color-brand-primary);
+    transform: translateY(-3px);
+    box-shadow: 0 14px 30px rgba(0,0,0,0.22), inset 0 -4px 8px rgba(255,255,255,0.02);
+    background: linear-gradient(#e14b4b, #9f1a28);
 }
 
 .search-form {
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    transform: translateY(-50%);
     display: flex;
 }
 .search-form input[type="text"] {
@@ -133,12 +187,20 @@ h1, h2, h3, h4, h5, h6 {
     background-color: #eee;
 }
 
-.nav-toggle {
-    display: none;
+.menu-toggle {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     background: none;
     border: none;
-    font-size: 1.5rem;
     cursor: pointer;
+    padding: 0.5rem;
+}
+
+.menu-toggle img {
+    height: 24px;
+    width: 24px;
 }
 
 /* --- 5. CONTEÚDO PRINCIPAL E RODAPÉ --- */
@@ -183,9 +245,22 @@ main {
 @media (max-width: 800px) {
     .header-container {
         flex-wrap: wrap; 
+        position: relative;
     }
-    .nav-toggle {
+    .search-form {
+        position: static;
+        transform: none;
+        order: 3;
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    .menu-toggle {
         display: block;
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        order: 4;
     }
     .main-nav {
         display: none;
