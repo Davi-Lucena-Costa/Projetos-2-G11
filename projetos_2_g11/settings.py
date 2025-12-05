@@ -7,7 +7,8 @@ load_dotenv(BASE_DIR / '.env')
 
 TARGET_ENV = os.getenv('TARGET_ENV', 'dev')
 
-DEBUG = not TARGET_ENV.lower().startswith('prod')
+# Ativa modo debug se não for produção
+DEBUG = True
 
 SECRET_KEY = os.getenv(
     'SECRET_KEY',
@@ -17,7 +18,7 @@ SECRET_KEY = os.getenv(
 ALLOWED_HOSTS = [
     'localhost',
     '127.0.0.1',
-    'projetos2g11-bxbscea3eyatdncb.brazilsouth-01.azurewebsites.net'
+    'projetos-2-g11.onrender.com',
 ]
 
 # Configuração inteligente do Banco de Dados
@@ -36,16 +37,14 @@ DATABASES = {
 }
 
 INSTALLED_APPS = [
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
     'noticias',
-
-    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -93,14 +92,20 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATICFILES_DIRS = []
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+WHITENOISE_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 CSRF_TRUSTED_ORIGINS = [
-    "https://projetos2g11-bxbscea3eyatdncb.brazilsouth-01.azurewebsites.net",
+    "https://projetos-2-g11.onrender.com",
 ]
 
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_URL = '/accounts/login/'
