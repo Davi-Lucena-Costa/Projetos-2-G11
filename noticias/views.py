@@ -51,18 +51,22 @@ def pesquisar_noticias(request):
         messages.error(request, "Digite algo para pesquisar.")
         return redirect('home')
 
-    # Se tiver termo, salva e busca normalmente
-    nova_pesquisa = Pesquisa(termo_buscado=termo)
-    if request.user.is_authenticated:
-        nova_pesquisa.usuario = request.user
-    nova_pesquisa.save()
-
+    # Execução da busca antes de salva a pesquisa
     resultados = Noticia.objects.filter(
         Q(titulo__icontains=termo) | Q(conteudo__icontains=termo)
     ).distinct().order_by('-data_publicacao')
 
+    # Salva o termo SOMENTE SE houver resultados
+    if resultados.exists():
+        nova_pesquisa = Pesquisa(termo_buscado=termo)
+        if request.user.is_authenticated:
+            nova_pesquisa.usuario = request.user
+        nova_pesquisa.save() # Salva apenas se teve utilidade na BUSCA
+    
+    
     contexto = { 'termo': termo, 'resultados': resultados }
     return render(request, 'noticias/pesquisa.html', contexto)
+
 
 def detalhe_noticia(request, noticia_id):
     noticia = get_object_or_404(Noticia, pk=noticia_id)
