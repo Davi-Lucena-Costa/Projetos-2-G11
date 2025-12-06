@@ -1,4 +1,5 @@
 {% extends 'noticias/base.html' %}
+{% load static %}
 
 {% block title %}Rádio Jornal Ao Vivo | {{ block.super }}{% endblock %}
 
@@ -8,10 +9,15 @@
 
     <section class="radio-player-wrapper">
         <h3>Ouvir Agora</h3>
-        <audio controls class="radio-player">
-            <source src="https://playerservices.streamtheworld.com/api/livestream-redirect/RADIO_JORNAL.mp3" type="audio/mpeg">
+
+        <audio controls autoplay class="radio-player">
+            <source src="{% static 'noticias/audio/primeira_pagina.mp3' %}" type="audio/mpeg">
             Seu navegador não suporta o player de áudio.
         </audio>
+
+        <p style="text-align:center;margin-top:10px;color:#666;font-size:0.9em;">
+            <em>🎧 Tocando agora: Último programa gravado</em>
+        </p>
     </section>
 
     <hr class="section-divider">
@@ -23,20 +29,21 @@
             {% for programa in programacao %}
                 <div class="programa-item">
                     <div class="programa-horario">
-                        {{ programa.horario_inicio|time:"H:i" }}
+                        {{ programa.horario_inicio|time:"H:i" }} - {{ programa.horario_fim|time:"H:i" }}
                     </div>
+
                     <div class="programa-detalhes">
                         <h4 class="programa-nome">{{ programa.nome_programa }}</h4>
+
                         {% if programa.apresentador %}
-                            <p class="programa-apresentador">com {{ programa.apresentador }}</p>
+                            <p class="programa-apresentador">Apresentação: {{ programa.apresentador }}</p>
                         {% endif %}
                     </div>
                 </div>
             {% empty %}
-                <p class="empty-message">A programação de hoje ainda não foi cadastrada.</p>
+                <p class="empty-message">Nenhum programa cadastrado para hoje.</p>
             {% endfor %}
         </div>
     </section>
-
 </div>
 {% endblock %}
