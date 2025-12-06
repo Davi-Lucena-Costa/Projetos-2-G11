@@ -1,23 +1,57 @@
+
 {% load static %}
+
 <!DOCTYPE html>
+
 <html lang="pt-br">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <meta name="description" content="O portal de notícias do Jornal do Commercio, otimizado para você.">
-    
+
+   
+
     <title>{% block title %}Jornal do Commercio{% endblock %}</title>
 
+
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
+
+
     <link rel="stylesheet" href="{% static 'noticias/css/style.css' %}">
+
 </head>
+
 <body>
 
+
+
     <header class="site-header">
+
         <div class="container header-container">
+<<<<<<< HEAD
+
+           
+
+            <h1 class="logo">
+
+                <a href="{% url 'home' %}">
+
+                    <img src="{% static 'noticias/img/logo.svg' %}" alt="Jornal do Commercio">
+
+                </a>
+
+            </h1>
+=======
             
             <div class="header-top">
                 <button class="brand-badge" type="button" aria-label="Edição do dia" data-url="{% if noticia_mais_recente %}{% url 'detalhe_noticia' noticia_mais_recente.id %}{% else %}{% url 'home' %}{% endif %}">
@@ -32,68 +66,134 @@
                     </a>
                 </h1>
             </div>
+>>>>>>> 2eeee9121e8533ae9a9ab19adf93210b3d1e345b
+
+
 
             <form method="get" action="{% url 'pesquisar_noticias' %}" class="search-form">
+
                 <input type="text" name="q" placeholder="Pesquisar..." value="{{ request.GET.q|default:'' }}" aria-label="Pesquisar">
+
                 <button type="submit" class="search-btn" aria-label="Buscar">🔍</button>
+
             </form>
 
+
+
             <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
+
                 <img src="{% static 'noticias/img/icon-menu.svg' %}" alt="Menu">
+
             </button>
+
         </div>
+
     </header>
+
+
 
     <div class="header-divider"></div>
 
+
+
     <div class="menu-overlay" id="menu-overlay" aria-hidden="true"></div>
 
+
+
     <nav class="main-nav" id="main-nav" aria-hidden="true">
+
         <div class="container">
+
             <ul>
+
                 <li><a href="{% url 'home' %}">Home</a></li>
+
                 <li><a href="#">Esportes</a></li>
+
                 <li><a href="#">Política</a></li>
-                
+
+               
+
                 <li><a href="{% url 'pagina_radio' %}">Rádio</a></li>
-                
+
+               
+
                 {% if user.is_authenticated %}
+
                     <li><a href="{% url 'lista_salvos' %}">Meus Salvos</a></li>
+
                     <li><a href="{% url 'admin:logout' %}">Sair ({{ user.username }})</a></li>
+
                 {% else %}
+
                     <li><a href="{% url 'login' %}">Login</a></li>
+
                 {% endif %}
-                
+
+               
+
                 <li class="nav-item-acessibilidade">
+
                     <div class="acessibilidade-controles">
+
                         <button id="diminuir-fonte" aria-label="Diminuir fonte" title="Diminuir fonte">A-</button>
+
                         <button id="aumentar-fonte" aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
+
                         <button id="alto-contraste" aria-label="Modo de alto contraste" title="Modo de Alto Contraste">◐</button>
+
                     </div>
+
                 </li>
+
             </ul>
+
         </div>
+
     </nav>
 
+
+
     {% if messages %}
+
         <div class="messages-container">
+
             {% for message in messages %}
+
                 <p class="message {{ message.tags }}">{{ message }}</p>
+
             {% endfor %}
+
         </div>
+
     {% endif %}
 
+
+
     <main>
+
         {% block content %}
+
         {% endblock %}
+
     </main>
 
+
+
     <footer class="site-footer">
+
         <div class="container">
+
             <p>&copy; {% now "Y" %} - Jornal do Commercio - Todos os direitos reservados.</p>
+
         </div>
+
     </footer>
 
+
+
     <script src="{% static 'noticias/js/main.js' %}"></script>
+
 </body>
+
 </html>

@@ -1,23 +1,44 @@
 /* noticias/static/noticias/css/style.css */
 
+
+
 /* --- GERAL --- */
+
 body {
+
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
     margin: 0;
+
     background-color: #f8f9fa;
+
     color: #212529;
+
     line-height: 1.6;
+
 }
+
 main { max-width: 960px; margin: 2rem auto; padding: 0 1rem; }
+
 a { color: #0d6efd; text-decoration: none; }
+
 a:hover { text-decoration: underline; }
+
 hr { border: 0; border-top: 1px solid #dee2e6; margin: 2rem 0; }
 
+
+
 /* --- CABEÇALHO E NAVEGAÇÃO --- */
+
 header { background-color: #fff; border-bottom: none; padding: 1rem; text-align: center; position: relative; }
+
 header h1 a { color: #212529; font-size: 1.8rem; }
+
 header h1 img { height: 80px; width: auto; display: block; max-width: 300px; object-fit: contain; }
 
+<<<<<<< HEAD
+
+=======
 .header-top {
     display: flex;
     align-items: center;
@@ -91,168 +112,332 @@ header h1 img { height: 80px; width: auto; display: block; max-width: 300px; obj
     .brand-badge-text { font-size: 0.85rem; }
     header h1 img { height: 64px; }
 }
+>>>>>>> 2eeee9121e8533ae9a9ab19adf93210b3d1e345b
 
 .search-form {
+
     position: absolute;
+
     right: 50px;
+
     top: 50%;
+
     transform: translateY(-50%);
+
     display: flex;
+
 }
+
+
 
 .search-form input {
+
     border: 1px solid #dee2e6;
+
     border-right: none;
+
     padding: 0.5rem;
+
     border-radius: 4px 0 0 4px;
+
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+
 }
+
+
 
 .search-form button {
+
     border: 1px solid #dee2e6;
+
     background: #f8f8f8;
+
     cursor: pointer;
+
     padding: 0 0.75rem;
+
     border-radius: 0 4px 4px 0;
+
 }
+
+
 
 .search-form button:hover {
+
     background: #eee;
+
 }
+
+
 
 .menu-toggle {
+
     position: absolute;
+
     right: 0;
+
     top: 50%;
+
     transform: translateY(-50%);
+
     background: none;
+
     border: none;
+
     cursor: pointer;
+
     padding: 0.5rem;
+
 }
 
+
+
 .menu-toggle img {
+
     height: 24px;
+
     width: 24px;
+
 }
+
+
+
 
 
 .header-divider {
+
     width: 100vw;
+
     height: 1px;
+
     background-color: #dee2e6;
+
     box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+
     position: relative;
+
     left: 50%;
+
     right: 50%;
+
     margin-left: -50vw;
+
     margin-right: -50vw;
+
 }
 
-header nav { 
+
+
+header nav {
+
     padding: 0.75rem 0;
+
     margin: 0;
+
 }
+
+
 
 header nav ul {
+
     list-style: none;
+
     display: flex;
+
     justify-content: center;
+
     gap: 1rem;
+
     flex-wrap: wrap;
+
     margin: 0;
+
     padding: 0;
+
 }
 
-header nav a { 
+
+
+header nav a {
+
     display: inline-block;
+
     font-weight: 700;
+
     color: #fff;
+
     text-decoration: none;
+
     font-size: 0.95rem;
+
     padding: 0.45rem 1.1rem;
+
     border-radius: 999px;
+
     background: linear-gradient(#dc3545, #b11f2f);
+
     border: 2px solid #a61b2b;
+
     box-shadow: 0 8px 18px rgba(0,0,0,0.18), inset 0 -6px 12px rgba(255,255,255,0.04);
+
     text-shadow: 0 1px 0 rgba(0,0,0,0.12);
+
     transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+
 }
+
 header nav a:hover {
+
     transform: translateY(-3px);
+
     box-shadow: 0 14px 30px rgba(0,0,0,0.22), inset 0 -4px 8px rgba(255,255,255,0.02);
+
     background: linear-gradient(#e14b4b, #9f1a28);
+
 }
+
  
 
+
+
 @media (max-width: 800px) {
+
     header { position: relative; }
+
     .search-form { position: static; transform: none; display: flex; margin: 0.5rem 0 0 0; }
+
     .menu-toggle { display: block; }
+
     header nav { display: none; }
+
     header nav.is-active { display: flex; }
 
+
+
     /* also apply to .main-nav when nav is outside header (template uses .main-nav) */
+
     .main-nav {
+
         position: fixed;
+
         top: 0;
+
         right: 0;
+
         height: 100vh;
+
         width: 40%;
+
         max-width: 420px;
+
         background: #fff;
+
         box-shadow: -6px 0 20px rgba(0,0,0,0.15);
+
         transform: translateX(100%);
+
         transition: transform 300ms ease;
+
         padding: 3.5rem 1rem 1rem 1rem;
+
         display: block;
+
         z-index: 100;
+
         overflow-y: auto;
+
     }
+
     .main-nav.is-active { transform: translateX(0); }
+
 }
+
+
 
 .search-form { display: inline-block; margin-left: 20px; }
+
 .search-form input { border: 1px solid #ced4da; padding: 5px 8px; border-radius: 4px; }
+
 .search-form button { background: none; border: none; cursor: pointer; font-size: 1rem; }
 
+
+
 /* --- CARDS DE NOTÍCIA (HOME, PESQUISA, SALVOS) --- */
+
 .noticias-container { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.5rem; }
+
 .noticia-card {
+
     background-color: #fff;
+
     border: 1px solid #dee2e6;
+
     border-radius: 0.25rem;
+
     padding: 1.25rem;
+
     box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+
     transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
 }
+
 .noticia-card:hover { transform: translateY(-5px); box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15); }
+
 .noticia-card h3 { margin-top: 0; font-size: 1.2rem; }
+
 .noticia-card p { font-size: 0.9em; color: #6c757d; margin-bottom: 0; }
 
+
+
 /* --- PÁGINA DE DETALHE DA NOTÍCIA --- */
+
 .noticia-detalhe { background-color: #fff; padding: 2rem; border-radius: 0.25rem; border: 1px solid #dee2e6; }
+
 .noticia-detalhe .info { color: #6c757d; margin-bottom: 1.5rem; }
+
 .conteudo-noticia p { margin-bottom: 1rem; }
+
 .conteudo-noticia b, .conteudo-noticia strong { font-weight: 600; }
 
+
+
 /* --- BOTÃO "SALVAR PARA DEPOIS" --- */
+
 .btn-salvar {
+
     display: inline-block;
+
     font-weight: 400;
+
     color: #fff;
+
     background-color: #0d6efd;
+
     text-align: center;
+
     vertical-align: middle;
+
     cursor: pointer;
+
     border: 1px solid #0d6efd;
+
     padding: 0.5rem 1rem;
+
     font-size: 1rem;
+
     border-radius: 0.25rem;
+
     transition: background-color 0.15s ease-in-out;
+
 }
+
 .btn-salvar:hover { background-color: #0b5ed7; }
+
 .btn-salvar.removido { background-color: #dc3545; border-color: #dc3545; }
+
 .btn-salvar.removido:hover { background-color: #bb2d3b; }
+
+
 
 footer { text-align: center; padding: 2rem; margin-top: 2rem; background-color: #e9ecef; color: #6c757d; font-size: 0.9em; }

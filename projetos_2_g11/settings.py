@@ -21,12 +21,19 @@ ALLOWED_HOSTS = [
     'projetos-2-g11.onrender.com',
 ]
 
+# Configuração inteligente do Banco de Dados
+if TARGET_ENV == 'prod':
+    # Se estiver na Azure, usa o caminho do servidor Linux
+    DB_NAME = '/home/site/db.sqlite3'
+else:
+    # Se estiver no seu Windows, usa a pasta do projeto
+    DB_NAME = BASE_DIR / 'db.sqlite3'
+
 DATABASES = {
-    'default': dj_database_url.parse(
-        os.getenv("DATABASE_URL", "sqlite:///db.sqlite3"),
-        conn_max_age=600,
-        conn_health_checks=True
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': DB_NAME,
+    }
 }
 
 INSTALLED_APPS = [
