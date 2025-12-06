@@ -26,7 +26,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+<<<<<<< HEAD
     // --- LÓGICA DE ACESSIBILIDADE (GLOBAL) ---
+=======
+    // --- LÓGICA DO BOTÃO DE EDIÇÃO DO DIA ---
+    
+    const brandBadge = document.querySelector('.brand-badge');
+    if (brandBadge) {
+        brandBadge.addEventListener('click', () => {
+            const url = brandBadge.getAttribute('data-url');
+            if (url) {
+                window.location.href = url;
+            }
+        });
+    }
+
+    // --- NOVA LÓGICA DE ACESSIBILIDADE ---
+>>>>>>> 2eeee9121e8533ae9a9ab19adf93210b3d1e345b
     
     console.log("Carregando controles de acessibilidade...");
     

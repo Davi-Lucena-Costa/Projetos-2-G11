@@ -38,6 +38,7 @@
     <header class="site-header">
 
         <div class="container header-container">
+<<<<<<< HEAD
 
            
 
@@ -50,6 +51,22 @@
                 </a>
 
             </h1>
+=======
+            
+            <div class="header-top">
+                <button class="brand-badge" type="button" aria-label="Edição do dia" data-url="{% if noticia_mais_recente %}{% url 'detalhe_noticia' noticia_mais_recente.id %}{% else %}{% url 'home' %}{% endif %}">
+                    <div class="brand-badge-inner">
+                        <img src="{% static 'noticias/img/edicao.webp' %}" alt="Edição" class="brand-badge-img">
+                        <span class="brand-badge-text">Edição do dia</span>
+                    </div>
+                </button>
+                <h1 class="logo">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'noticias/img/logo.svg' %}" alt="Jornal do Commercio">
+                    </a>
+                </h1>
+            </div>
+>>>>>>> 2eeee9121e8533ae9a9ab19adf93210b3d1e345b
 
 
 
