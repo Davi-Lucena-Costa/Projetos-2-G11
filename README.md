@@ -17,4 +17,55 @@ Este projeto tem como objetivo **conquistar a fidelidade dos clientes do Jornal 
 
 ### 📊 Backlog do Projeto
 
-![Backlog do Projeto com histórias concluídas](https://raw.githubusercontent.com/Bernalencouto/Projetos-2-G11/main/imagens/Backlogconcluido.png)
+![Backlog do Projeto com histórias concluídas](https://raw.githubusercontent.com/Davi-Lucena-Costa/Projetos-2-G11/main/imagens/jira.png)
+
+---
+
+## 🛠️ Configuração do Ambiente de Desenvolvimento
+
+Siga estes passos para rodar o projeto no seu computador localmente (Windows).
+
+### 1. Pré-requisitos
+Certifique-se de ter instalado:
+- **Python 3.11+**: [Baixar Python](https://www.python.org/downloads/)
+- **Git**: [Baixar Git](https://git-scm.com/downloads)
+- **VS Code** (Recomendado)
+
+### 2. Clonar o Repositório
+Abra o seu terminal (Git Bash ou PowerShell) e rode:
+
+```bash
+git clone [https://github.com/Davi-Lucena-Costa/Projetos-2-G11.git](https://github.com/Davi-Lucena-Costa/Projetos-2-G11.git)
+cd Projetos-2-G11
+
+# Criar e Ativar o Ambiente Virtual (Venv)
+No Windows (PowerShell):
+
+# Cria a pasta 'venv'
+python -m venv venv
+
+# Ativa o ambiente (Obrigatório antes de rodar o projeto)
+.\venv\Scripts\activate
+
+
+# Instalar Dependências
+Com o ambiente virtual ativo, instale todas as bibliotecas necessárias (Django e demais dependências):
+
+pip install -r requirements.txt
+
+
+# Configurar o Banco de Dados
+
+Crie as tabelas necessárias no banco local (SQLite):
+
+python manage.py migrate
+
+ #Opcional: Crie um superusuário para acessar o painel administrativo (/admin):
+
+python manage.py createsuperuser
+
+# Rodar o Projeto 🚀
+
+Agora basta iniciar o servidor local:
+
+python manage.py runserver

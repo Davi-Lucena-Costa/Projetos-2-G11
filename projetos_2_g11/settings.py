@@ -40,7 +40,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'noticias',
-    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +65,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'noticias.context_processors.noticia_mais_recente',
             ],
         },
     },
