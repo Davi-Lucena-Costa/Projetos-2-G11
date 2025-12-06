@@ -86,6 +86,84 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
 }
 
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    position: relative;
+}
+
+.brand-badge {
+    width: 190px;
+    height: 64px;
+    background-color: #FFFFFF;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -50vw;
+    transform: translateX(32px) translateY(-50%);
+    z-index: 110;
+}
+
+.brand-badge {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.brand-badge:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(166,27,43,0.12);
+}
+
+.brand-badge img.brand-badge-img {
+    width: 64px;
+    height: 64px;
+    display: block;
+    object-fit: cover;
+    flex: 0 0 64px;
+}
+
+.brand-badge-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 8px;
+}
+
+.brand-badge-text {
+    color: #000000;
+    font-size: 1.2rem;
+    font-weight: 700;
+    line-height: 1;
+    white-space: nowrap;
+}
+.brand-badge:hover .brand-badge-text {
+    color: #a61b2b;
+    transition: color 160ms ease;
+}
+
+@media (max-width: 800px) {
+    .brand-badge {
+        width: 150px;
+        height: 48px;
+        border-radius: 0;
+        transform: translateX(16px) translateY(-50%);
+    }
+    .brand-badge img.brand-badge-img { width: 48px; height: 48px; flex: 0 0 48px; }
+    .brand-badge-text { font-size: 0.85rem; }
+    .logo img { height: 64px; }
+}
+
 .logo a {
     font-family: var(--font-serif);
     font-size: 1.75rem; /* 28px */

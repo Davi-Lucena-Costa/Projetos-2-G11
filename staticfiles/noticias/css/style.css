@@ -18,6 +18,80 @@ header { background-color: #fff; border-bottom: none; padding: 1rem; text-align:
 header h1 a { color: #212529; font-size: 1.8rem; }
 header h1 img { height: 80px; width: auto; display: block; max-width: 300px; object-fit: contain; }
 
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    position: relative;
+}
+
+.brand-badge {
+    width: 260px;
+    height: 64px;
+    background-color: #a61b2b;
+    border: none;
+    box-shadow: none;
+    border-radius: 0;
+    /* remove from flow so logo stays centered; align visually to viewport left */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-left: -50vw; /* move to viewport left */
+    transform: translateX(32px) translateY(-50%); /* spacing from edge + vertical centering */
+    z-index: 110;
+}
+
+.brand-badge {
+    display: flex;
+    align-items: center;
+    padding: 0;
+    cursor: pointer;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.brand-badge:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(166,27,43,0.12);
+}
+
+.brand-badge img.brand-badge-img {
+    width: 64px;
+    height: 64px;
+    display: block;
+    object-fit: cover;
+    flex: 0 0 64px;
+}
+
+.brand-badge-inner {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-right: 8px;
+}
+
+.brand-badge-text {
+    color: #ffffff;
+    font-size: 0.95rem;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.brand-badge:hover .brand-badge-text {
+    color: #a61b2b;
+    transition: color 160ms ease;
+}
+
+@media (max-width: 800px) {
+    .brand-badge { width: 180px; height: 48px; border-radius: 0; transform: translateX(16px) translateY(-50%); }
+    .brand-badge img.brand-badge-img { width: 48px; height: 48px; flex: 0 0 48px; }
+    .brand-badge-text { font-size: 0.85rem; }
+    header h1 img { height: 64px; }
+}
+
 .search-form {
     position: absolute;
     right: 50px;

@@ -19,11 +19,19 @@
     <header class="site-header">
         <div class="container header-container">
             
-            <h1 class="logo">
-                <a href="{% url 'home' %}">
-                    <img src="{% static 'noticias/img/logo.svg' %}" alt="Jornal do Commercio">
-                </a>
-            </h1>
+            <div class="header-top">
+                <button class="brand-badge" type="button" aria-label="Edição do dia" data-url="{% if noticia_mais_recente %}{% url 'detalhe_noticia' noticia_mais_recente.id %}{% else %}{% url 'home' %}{% endif %}">
+                    <div class="brand-badge-inner">
+                        <img src="{% static 'noticias/img/edicao.webp' %}" alt="Edição" class="brand-badge-img">
+                        <span class="brand-badge-text">Edição do dia</span>
+                    </div>
+                </button>
+                <h1 class="logo">
+                    <a href="{% url 'home' %}">
+                        <img src="{% static 'noticias/img/logo.svg' %}" alt="Jornal do Commercio">
+                    </a>
+                </h1>
+            </div>
 
             <form method="get" action="{% url 'pesquisar_noticias' %}" class="search-form">
                 <input type="text" name="q" placeholder="Pesquisar..." value="{{ request.GET.q|default:'' }}" aria-label="Pesquisar">
