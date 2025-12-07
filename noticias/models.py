@@ -1,5 +1,3 @@
-# noticias/models.py
-
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError 
@@ -71,12 +69,10 @@ class SugestaoUser(models.Model):
         texto_lower = texto.lower() 
         if len(texto) < 4:
             raise ValidationError("Sugestão muito curta. Digite pelo menos 4 caracteres.")
-        
         palavras_proibidas = ['crimes', 'spam', 'sem sentido', 'venda_ilegal']
         for palavra in palavras_proibidas:
             if palavra in texto_lower:
                 raise ValidationError("A sugestão contém uma palavra inválida: por favor seja mais específico")
-        
         self.texto = texto
 
     def __str__(self):
@@ -90,23 +86,22 @@ class Comentario(models.Model):
 
     class Meta:
         ordering = ['data_criacao']
+
     def __str__(self):
         return f"Comentário de {self.autor.username} em '{self.noticia.titulo[:20]}...'"
 
 class ProgramaRadio(models.Model):
-    """
-    Armazena um item da grade de programação da rádio.
-    """
     nome_programa = models.CharField(max_length=200)
     apresentador = models.CharField(max_length=200, blank=True)
     horario_inicio = models.TimeField()
     horario_fim = models.TimeField()
-    
+    audio = models.FileField(upload_to='programas_radio/', blank=True, null=True)
+
     class Meta:
-        # Ordena a programação por hora de início
         ordering = ['horario_inicio']
         verbose_name = "Programa de Rádio"
         verbose_name_plural = "Programação da Rádio"
 
     def __str__(self):
         return f"{self.horario_inicio} - {self.nome_programa}"
+

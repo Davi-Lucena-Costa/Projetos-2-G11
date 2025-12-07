@@ -1,13 +1,13 @@
 from pathlib import Path
 import os
 from dotenv import load_dotenv
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / '.env')
 
 TARGET_ENV = os.getenv('TARGET_ENV', 'dev')
 
-# Ativa modo debug se não for produção
 DEBUG = True
 
 SECRET_KEY = os.getenv(
@@ -21,11 +21,9 @@ ALLOWED_HOSTS = [
     'projetos-2-g11.onrender.com',
 ]
 
-# Banco de dados (PostgreSQL via DATABASE_URL do Render)
-import dj_database_url
 DATABASES = {
     'default': dj_database_url.parse(
-        os.getenv("DATABASE_URL"),
+        os.getenv("DATABASE_URL", "sqlite:///db.sqlite3"),
         conn_max_age=600,
         conn_health_checks=True
     )
@@ -105,3 +103,5 @@ CSRF_TRUSTED_ORIGINS = [
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
