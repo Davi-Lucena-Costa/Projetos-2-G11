@@ -5,6 +5,20 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log("Módulo JavaScript principal carregado.");
 
+    // --- RESTAURAR PREFERÊNCIAS DE ACESSIBILIDADE DO LOCALSTORAGE ---
+    
+    // Restaurar modo alto-contraste
+    const savedContrast = localStorage.getItem('alto-contraste');
+    if (savedContrast === 'true') {
+        document.body.classList.add('alto-contraste');
+    }
+    
+    // Restaurar tamanho de fonte
+    const savedFontSize = localStorage.getItem('font-size');
+    if (savedFontSize) {
+        document.documentElement.style.fontSize = savedFontSize;
+    }
+
     // --- LÓGICA DO MENU LATERAL (BOTÃO HAMBÚRGUER) ---
     const menuToggle = document.querySelector('.menu-toggle');
     const sideMenu = document.querySelector('#side-menu');
@@ -84,7 +98,10 @@ document.addEventListener('DOMContentLoaded', () => {
         btnAltoContraste.addEventListener('click', () => {
             // Adiciona ou remove a classe 'alto-contraste' do <body>
             document.body.classList.toggle('alto-contraste');
-            console.log("Modo de alto contraste alternado.");
+            // Salvar no localStorage
+            const isActive = document.body.classList.contains('alto-contraste');
+            localStorage.setItem('alto-contraste', isActive ? 'true' : 'false');
+            console.log("Modo de alto contraste alternado. Preferência salva.");
         });
     }
 
@@ -97,7 +114,10 @@ document.addEventListener('DOMContentLoaded', () => {
             let fontSize = parseFloat(window.getComputedStyle(root).fontSize);
             // Aumenta em 1px (com um limite de 24px)
             if (fontSize < 24) {
-                root.style.fontSize = (fontSize + 1) + 'px';
+                const newSize = (fontSize + 1) + 'px';
+                root.style.fontSize = newSize;
+                // Salvar no localStorage
+                localStorage.setItem('font-size', newSize);
             }
         });
     }
@@ -109,7 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
             let fontSize = parseFloat(window.getComputedStyle(root).fontSize);
             // Diminui em 1px (com um limite de 12px)
             if (fontSize > 12) {
-                root.style.fontSize = (fontSize - 1) + 'px';
+                const newSize = (fontSize - 1) + 'px';
+                root.style.fontSize = newSize;
+                // Salvar no localStorage
+                localStorage.setItem('font-size', newSize);
             }
         });
     }

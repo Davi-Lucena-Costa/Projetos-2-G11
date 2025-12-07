@@ -747,6 +747,17 @@ body.alto-contraste .empty-message {
     color: #fff;
 }
 
+body.alto-contraste .brand-badge {
+    background-color: #000;
+    border: 1px solid #fff;
+}
+body.alto-contraste .brand-badge-text {
+    color: #fff;
+}
+body.alto-contraste .brand-badge:hover .brand-badge-text {
+    color: #ffff00;
+}
+
 body.alto-contraste h1,
 body.alto-contraste h2,
 body.alto-contraste h3,
@@ -792,6 +803,29 @@ body.alto-contraste .search-form .search-btn {
     background-color: #222;
     border-color: #777;
     color: #fff;
+}
+
+body.alto-contraste .radio-player-wrapper {
+    background-color: #000;
+    border-color: #fff;
+    color: #fff;
+}
+body.alto-contraste .programa-item {
+    background-color: #000;
+    border-color: #fff;
+    color: #fff;
+}
+body.alto-contraste .programa-horario {
+    color: #ffff00;
+}
+body.alto-contraste .programa-detalhes {
+    border-left-color: #fff;
+}
+body.alto-contraste .programa-nome {
+    color: #fff;
+}
+body.alto-contraste .programa-apresentador {
+    color: #ccc;
 }
 
 /* --- 15. ESTILOS DA PÁGINA DE RÁDIO --- */

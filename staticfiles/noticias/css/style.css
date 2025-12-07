@@ -300,3 +300,21 @@ header nav a:hover {
 .btn-salvar.removido:hover { background-color: #bb2d3b; }
 
 footer { text-align: center; padding: 2rem; margin-top: 2rem; background-color: #e9ecef; color: #6c757d; font-size: 0.9em; }
+
+/* Alto contraste */
+body.alto-contraste .brand-badge {
+    background-color: #000;
+    border: 1px solid #fff;
+}
+body.alto-contraste .brand-badge-text {
+    color: #fff;
+}
+body.alto-contraste .brand-badge:hover .brand-badge-text {
+    color: #ffff00;
+}
+
+body.alto-contraste .radio-player-wrapper {
+    background-color: #000;
+    border-color: #fff;
+    color: #fff;
+}
