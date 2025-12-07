@@ -209,6 +209,10 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     padding: 0.75rem 0;
     margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
 }
 
 .main-nav ul {
@@ -235,6 +239,66 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateY(-3px);
     box-shadow: 0 14px 30px rgba(0,0,0,0.22), inset 0 -4px 8px rgba(255,255,255,0.02);
     background: linear-gradient(#e14b4b, #9f1a28);
+}
+
+.menu-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 200ms ease;
+    z-index: 130; /* overlay acima do badge e dos demais elementos */
+}
+
+.menu-overlay.is-active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.side-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 320px;
+    max-width: 80vw;
+    background: #ffffff;
+    box-shadow: -8px 0 24px rgba(0, 0, 0, 0.18);
+    transform: translateX(100%);
+    transition: transform 250ms ease;
+    z-index: 140;
+    padding: 1.5rem 1rem;
+    overflow-y: auto;
+}
+
+.side-menu-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.75rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: #222;
+}
+
+.side-menu-close:hover {
+    color: #a61b2b;
+}
+
+.side-menu.is-active {
+    transform: translateX(0);
+}
+
+.side-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .search-form {
@@ -274,6 +338,7 @@ h1, h2, h3, h4, h5, h6 {
     border: none;
     cursor: pointer;
     padding: 0.5rem;
+    display: block;
 }
 
 .menu-toggle img {
@@ -341,7 +406,6 @@ main {
         order: 4;
     }
     .main-nav {
-        display: none;
         width: 100%;
         margin-top: 1rem;
     }
@@ -349,9 +413,6 @@ main {
         flex-direction: column;
         align-items: flex-start;
         gap: 1rem;
-    }
-    .main-nav.is-active {
-        display: block;
     }
 }
 /* --- 8. ESTILOS DA HOME (GRID DE NOTÍCIAS) --- */

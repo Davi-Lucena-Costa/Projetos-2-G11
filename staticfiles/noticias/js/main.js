@@ -5,24 +5,43 @@ document.addEventListener('DOMContentLoaded', () => {
     
     console.log("Módulo JavaScript principal carregado.");
 
-    // --- LÓGICA DO MENU MOBILE (HAMBÚRGUER) ---
-    
-    // 1. Encontra os elementos no HTML
-    const menuToggle = document.querySelector('.menu-toggle'); // O botão hambúrguer
-    const mainNav = document.querySelector('#main-nav');   // A navegação principal
+    // --- LÓGICA DO MENU LATERAL (BOTÃO HAMBÚRGUER) ---
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sideMenu = document.querySelector('#side-menu');
+    const menuOverlay = document.querySelector('#menu-overlay');
 
-    // 2. Verifica se os elementos existem na página
-    if (menuToggle && mainNav) {
-        
-        // 3. Adiciona um "ouvinte" de clique ao botão
+    const closeSideMenu = () => {
+        if (sideMenu) sideMenu.classList.remove('is-active');
+        if (menuOverlay) menuOverlay.classList.remove('is-active');
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+        if (sideMenu) sideMenu.setAttribute('aria-hidden', 'true');
+        if (menuOverlay) menuOverlay.setAttribute('aria-hidden', 'true');
+    };
+
+    const openSideMenu = () => {
+        if (sideMenu) sideMenu.classList.add('is-active');
+        if (menuOverlay) menuOverlay.classList.add('is-active');
+        if (menuToggle) menuToggle.setAttribute('aria-expanded', 'true');
+        if (sideMenu) sideMenu.setAttribute('aria-hidden', 'false');
+        if (menuOverlay) menuOverlay.setAttribute('aria-hidden', 'false');
+    };
+
+    if (menuToggle && sideMenu && menuOverlay) {
         menuToggle.addEventListener('click', () => {
-            
-            // 4. Adiciona ou remove a classe 'is-active' da navegação
-            mainNav.classList.toggle('is-active');
-            
-            // 5. Atualiza o atributo 'aria-expanded' para acessibilidade
-            const isExpanded = mainNav.classList.contains('is-active');
-            menuToggle.setAttribute('aria-expanded', isExpanded);
+            const willOpen = !sideMenu.classList.contains('is-active');
+            if (willOpen) {
+                openSideMenu();
+            } else {
+                closeSideMenu();
+            }
+        });
+
+        menuOverlay.addEventListener('click', closeSideMenu);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeSideMenu();
+            }
         });
     }
 
