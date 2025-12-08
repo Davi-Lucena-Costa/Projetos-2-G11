@@ -11,32 +11,44 @@ from .models import (
 )
 
 def home(request):
-    dados_sugestao = {'texto_sugerido': '', 'erro': None}
+    dados_sugestao = {
+        'texto_sugerido': '',
+        'erro': None
+    }
 
     if request.method == 'POST':
-        if 'sugestao_texto' in request.POST:
-            texto_brut = request.POST.get('sugestao_texto')
-            dados_sugestao['texto_sugerido'] = texto_brut
-            
+
+        texto_brut = request.POST.get('sugestao_texto', '').strip()
+        dados_sugestao['texto_sugerido'] = texto_brut
+
+        # Validação antes de criar objeto
+        if not texto_brut:
+            dados_sugestao['erro'] = "A sugestão não pode estar vazia."
+            messages.error(request, "A sugestão não pode estar vazia.")
+        else:
             usuario = request.user if request.user.is_authenticated else None
-            
+            sugestao = SugestaoUser(texto=texto_brut, usuario=usuario)
+
             try:
-                sugestao = SugestaoUser(texto=texto_brut, usuario=usuario)
                 sugestao.full_clean()
                 sugestao.save()
+
                 messages.success(request, "Sugestão enviada com sucesso! Obrigado :)")
+
+                # REDIRECT remove mensagens antigas e reseta o formulário
                 return redirect('home')
-            
+
             except ValidationError as e:
                 dados_sugestao['erro'] = e.messages[0]
-                messages.error(request, f"Erro ao enviar sugestão: {dados_sugestao['erro']}")
+                messages.error(request, dados_sugestao['erro'])
 
     ultimas_noticias = Noticia.objects.all().order_by('-data_publicacao')
-    
-    contexto = { 
+
+    contexto = {
         'lista_de_noticias': ultimas_noticias,
         'sugestao': dados_sugestao
     }
+
     return render(request, 'noticias/home.html', contexto)
 
 

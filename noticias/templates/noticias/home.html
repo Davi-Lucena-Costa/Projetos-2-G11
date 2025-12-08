@@ -32,13 +32,15 @@
         
         <form action="{% url 'home' %}" method="POST" class="sugestao-form">
             {% csrf_token %}
+
             <textarea name="sugestao_texto" rows="3" placeholder="Sua sugestão...">{{ sugestao.texto_sugerido }}</textarea>
-            
+
             {% if sugestao.erro %}
                 <p class="error-message">{{ sugestao.erro }}</p>
             {% endif %}
-            
-            <button type="submit" name="sugestao_texto" class="btn btn-primary">Enviar Sugestão</button>
+
+            <!-- 🔥 ALTERAÇÃO IMPORTANTE: remover name="sugestao_texto" -->
+            <button type="submit" class="btn btn-primary">Enviar Sugestão</button>
         </form>
     </section>
 
