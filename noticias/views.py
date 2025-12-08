@@ -3,10 +3,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ValidationError
-from django.contrib import messages 
+from django.contrib import messages
+from django.contrib.auth import login, logout
 
+from .forms import CadastroForm
 from .models import (
-    Noticia, LerMaisTarde, Pesquisa, SugestaoUser, 
+    Noticia, LerMaisTarde, Pesquisa, SugestaoUser,
     Comentario, ProgramaRadio
 )
 
@@ -17,11 +19,9 @@ def home(request):
     }
 
     if request.method == 'POST':
-
         texto_brut = request.POST.get('sugestao_texto', '').strip()
         dados_sugestao['texto_sugerido'] = texto_brut
 
-        # Validação antes de criar objeto
         if not texto_brut:
             dados_sugestao['erro'] = "A sugestão não pode estar vazia."
             messages.error(request, "A sugestão não pode estar vazia.")
@@ -32,29 +32,34 @@ def home(request):
             try:
                 sugestao.full_clean()
                 sugestao.save()
-
                 messages.success(request, "Sugestão enviada com sucesso! Obrigado :)")
-
-                # REDIRECT remove mensagens antigas e reseta o formulário
                 return redirect('home')
-
             except ValidationError as e:
                 dados_sugestao['erro'] = e.messages[0]
                 messages.error(request, dados_sugestao['erro'])
 
-    ultimas_noticias = Noticia.objects.all().order_by('-data_publicacao')
-
     contexto = {
-        'lista_de_noticias': ultimas_noticias,
+        'lista_de_noticias': Noticia.objects.all().order_by('-data_publicacao'),
         'sugestao': dados_sugestao
     }
-
     return render(request, 'noticias/home.html', contexto)
+
+
+def cadastrar_usuario(request):
+    if request.method == "POST":
+        form = CadastroForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Conta criada com sucesso! Agora faça login.")
+            return redirect('login')
+    else:
+        form = CadastroForm()
+
+    return render(request, 'registration/signup.html', {"form": form})
 
 
 def pesquisar_noticias(request):
     termo = request.GET.get('q', '').strip()
-
     if not termo:
         messages.error(request, "Digite algo para pesquisar.")
         return redirect('home')
@@ -68,9 +73,11 @@ def pesquisar_noticias(request):
         if request.user.is_authenticated:
             nova_pesquisa.usuario = request.user
         nova_pesquisa.save()
-    
-    contexto = {'termo': termo, 'resultados': resultados}
-    return render(request, 'noticias/pesquisa.html', contexto)
+
+    return render(request, 'noticias/pesquisa.html', {
+        'termo': termo,
+        'resultados': resultados
+    })
 
 
 def detalhe_noticia(request, noticia_id):
@@ -81,30 +88,25 @@ def detalhe_noticia(request, noticia_id):
         if not request.user.is_authenticated:
             messages.error(request, "Você precisa estar logado para enviar um comentário.")
         else:
-            conteudo_comentario = request.POST.get('conteudo', '').strip()
-            if conteudo_comentario:
+            conteudo = request.POST.get('conteudo', '').strip()
+            if conteudo:
                 Comentario.objects.create(
-                    noticia=noticia,
-                    autor=request.user,
-                    conteudo=conteudo_comentario
+                    noticia=noticia, autor=request.user, conteudo=conteudo
                 )
                 messages.success(request, "Seu comentário foi publicado!")
                 return redirect('detalhe_noticia', noticia_id=noticia.id)
             else:
                 messages.error(request, "O comentário não pode estar vazio.")
 
-    salvo_para_depois = False
+    salvo = False
     if request.user.is_authenticated:
-        salvo_para_depois = LerMaisTarde.objects.filter(
-            usuario=request.user, noticia=noticia
-        ).exists()
-    
-    contexto = { 
-        'noticia': noticia, 
-        'salvo_para_depois': salvo_para_depois,
-        'comentarios': comentarios
-    }
-    return render(request, 'noticias/detalhe.html', contexto)
+        salvo = LerMaisTarde.objects.filter(usuario=request.user, noticia=noticia).exists()
+
+    return render(request, 'noticias/detalhe.html', {
+        'noticia': noticia,
+        'comentarios': comentarios,
+        'salvo_para_depois': salvo
+    })
 
 
 @login_required
@@ -120,23 +122,20 @@ def salvar_noticia(request, noticia_id):
 
 @login_required
 def lista_salvos(request):
-    itens_salvos = LerMaisTarde.objects.filter(usuario=request.user)
-    contexto = {'itens_salvos': itens_salvos}
-    return render(request, 'noticias/salvos.html', contexto)
+    itens = LerMaisTarde.objects.filter(usuario=request.user)
+    return render(request, 'noticias/salvos.html', {'itens_salvos': itens})
 
 
 def pagina_radio(request):
     agora = datetime.now().time()
     programacao = ProgramaRadio.objects.all()
 
-    programa_atual = None
-    for p in programacao:
-        if p.horario_inicio <= agora <= p.horario_fim:
-            programa_atual = p
-            break
+    programa_atual = next(
+        (p for p in programacao if p.horario_inicio <= agora <= p.horario_fim),
+        None
+    )
 
-    contexto = {
+    return render(request, 'noticias/radio.html', {
         'programacao': programacao,
         'programa_atual': programa_atual
-    }
-    return render(request, 'noticias/radio.html', contexto)
+    })
