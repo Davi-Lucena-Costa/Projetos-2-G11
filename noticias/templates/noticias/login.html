@@ -1,0 +1,97 @@
+{% extends "noticias/base.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+
+<style>
+    .login-card {
+        max-width: 420px;
+        margin: 60px auto;
+        padding: 35px;
+        background: #ffffff;
+        border-radius: 14px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        text-align: center;
+        animation: fadeIn 0.4s ease;
+    }
+
+    .login-card h2 {
+        color: #4f46e5;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .login-card label {
+        float: left;
+        font-weight: bold;
+        margin-bottom: 4px;
+    }
+
+    .login-card input {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+        border: 1px solid #ccc;
+    }
+
+    .login-card button {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        background: #4f46e5;
+        border-radius: 8px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .login-card button:hover {
+        background: #4338ca;
+    }
+
+    .login-card a {
+        display: block;
+        margin-top: 15px;
+        color: #4f46e5;
+        text-decoration: none;
+    }
+
+    .login-card a:hover {
+        text-decoration: underline;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+
+<div class="login-card">
+
+    <h2>Entrar</h2>
+
+    {% if form.errors %}
+        <p style="color:red; font-weight:600;">Usuário ou senha incorretos.</p>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+
+        <label for="id_username">Usuário</label>
+        <input type="text" name="username" autofocus required id="id_username">
+
+        <label for="id_password">Senha</label>
+        <input type="password" name="password" required id="id_password">
+
+        <button type="submit">Entrar</button>
+
+        <a href="#">Criar conta</a>
+
+    </form>
+</div>
+
+{% endblock %}
