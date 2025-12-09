@@ -52,7 +52,29 @@
         <div class="side-menu-inner">
             <button class="side-menu-close" type="button" aria-label="Fechar menu">×</button>
             <ul>
-                {# menu lateral vazio; adicione itens aqui depois #}
+                {% if user.is_authenticated %}
+                    <li style="margin-bottom: 10px;">
+                        <a href="{% url 'lista_salvos' %}" style="display: block; width: 100%; padding: 12px; background-color: #b91c1c; color: white; text-align: center; border-radius: 6px; text-decoration: none; font-weight: bold; transition: background 0.3s;">
+                            Meus Salvos
+                        </a>
+                    </li>
+                    
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="width: 100%;">
+                            {% csrf_token %}
+                            <button type="submit" style="display: block; width: 100%; padding: 12px; background-color: #b91c1c; color: white; text-align: center; border-radius: 6px; border: none; font-weight: bold; cursor: pointer; font-size: 16px; font-family: inherit; transition: background 0.3s;">
+                                Sair ({{ user.username }})
+                            </button>
+                        </form>
+                    </li>
+                    
+                    <li style="border-bottom: 1px solid #ccc; margin: 20px 0;"></li>
+                {% endif %}
+                
+                <li style="margin-top: 20px;">
+                    <span style="font-size: 0.9em; display: block; color: #555;">Contato:</span>
+                    <strong style="color: #333;">grupo11pj2@gmail.com</strong>
+                </li>
             </ul>
         </div>
     </nav>
@@ -61,15 +83,11 @@
         <div class="container">
             <ul>
                 <li><a href="{% url 'home' %}">Home</a></li>
-                <li><a href="#">Esportes</a></li>
-                <li><a href="#">Política</a></li>
-                
+                <li><a href="{% url 'pagina_esportes' %}">Esportes</a></li>
+                <li><a href="{% url 'pagina_politica' %}">Política</a></li>
                 <li><a href="{% url 'pagina_radio' %}">Rádio</a></li>
                 
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'lista_salvos' %}">Meus Salvos</a></li>
-                    <li><a href="{% url 'admin:logout' %}">Sair ({{ user.username }})</a></li>
-                {% else %}
+                {% if not user.is_authenticated %}
                     <li><a href="{% url 'login' %}">Login</a></li>
                 {% endif %}
                 

@@ -1,0 +1,22 @@
+{% extends 'noticias/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h1 class="page-title">{{ categoria.nome }}</h1>
+
+<div class="noticias-container">
+    {% for noticia in noticias %}
+        <a href="{% url 'detalhe_noticia' noticia.id %}" class="noticia-item">
+            {% if noticia.imagem_capa_url %}
+                <img src="{{ noticia.imagem_capa_url }}" alt="{{ noticia.titulo }}">
+            {% endif %}
+            <h2>{{ noticia.titulo }}</h2>
+            <p class="data">{{ noticia.data_publicacao|date:"d/m/Y H:i" }}</p>
+        </a>
+    {% empty %}
+        <p>Nenhuma notícia encontrada nessa categoria.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

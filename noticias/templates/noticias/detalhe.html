@@ -1,11 +1,11 @@
 {% extends 'noticias/base.html' %}
 
 {% block content %}
-<div class="container">
+<div class="container" id="container-principal">
     
-    <article class="artigo-principal">
+    <article class="artigo-principal" id="artigo-principal">
         
-        <header class="artigo-header">
+        <header class="artigo-header" id="header-artigo">
             {% if messages %}
                 <div class="messages-container messages-artigo">
                     {% for message in messages %}
@@ -15,20 +15,29 @@
             {% endif %}
 
             <h1>{{ noticia.titulo }}</h1>
-            <p class="artigo-meta">
+            <p class="artigo-meta" id="meta-artigo">
                 Por: {{ noticia.autor.username }} em {{ noticia.data_publicacao|date:"d/m/Y H:i" }}
             </p>
         </header>
 
         <hr>
 
-        <section class="conteudo-noticia">
+        
+        <div class="modo-leitura-container" id="container-botao-modo">
+            <button class="btn" id="btn-modo-leitura">
+                Ativar modo de leitura
+            </button>
+        </div>
+
+        <hr>
+
+        <section class="conteudo-noticia" id="conteudo-artigo">
             {{ noticia.conteudo|safe }} 
         </section>
 
         <hr>
 
-        <div class="artigo-acoes">
+        <div class="artigo-acoes" id="acoes-artigo">
             {% if user.is_authenticated %}
                 <form action="{% url 'salvar_noticia' noticia.id %}" method="POST">
                     {% csrf_token %}
@@ -45,7 +54,7 @@
         </div>
     </article>
 
-    <section class="secao-comentarios">
+    <section class="secao-comentarios" id="comentarios-artigo">
         <hr class="section-divider">
         
         <h2>Deixe seu comentário</h2>
@@ -78,4 +87,82 @@
     </section>
 
 </div>
+
+
+<style>
+    .modo-leitura-fullscreen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #ffffff;
+        padding: 40px;
+        overflow-y: auto;
+        z-index: 9999;
+    }
+
+    .modo-leitura-conteudo {
+        max-width: 800px;
+        margin: 0 auto;
+        font-size: 1.2em;
+        line-height: 1.8em;
+    }
+
+    
+    #btn-modo-leitura,
+    .btn-sair-modo {
+        background-color: #D10000; 
+        border-color: #B30000;
+        color: white;
+        padding: 10px 16px;
+        font-size: 1em;
+        cursor: pointer;
+    }
+
+    .btn-sair-modo {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 10000;
+    }
+</style>
+
+
+<script>
+    const btnModoLeitura = document.getElementById('btn-modo-leitura');
+    let modoAtivo = false;
+
+    btnModoLeitura.addEventListener('click', () => {
+        if(modoAtivo) return;
+
+        modoAtivo = true;
+
+       
+        const leituraDiv = document.createElement('div');
+        leituraDiv.id = 'leitura-fullscreen';
+        leituraDiv.className = 'modo-leitura-fullscreen';
+
+        
+        const conteudoOriginal = document.getElementById('conteudo-artigo').cloneNode(true);
+
+        
+        conteudoOriginal.querySelectorAll('img').forEach(img => img.remove());
+
+        leituraDiv.innerHTML = `
+            <button class="btn btn-sair-modo" id="btn-sair-leitura">Sair do modo leitura</button>
+            <div class="modo-leitura-conteudo"></div>
+        `;
+
+        leituraDiv.querySelector('.modo-leitura-conteudo').appendChild(conteudoOriginal);
+
+        document.body.appendChild(leituraDiv);
+
+        
+        document.getElementById('btn-sair-leitura').addEventListener('click', () => {
+            document.getElementById('leitura-fullscreen').remove();
+            modoAtivo = false;
+        });
+    });
+</script>
 {% endblock %}

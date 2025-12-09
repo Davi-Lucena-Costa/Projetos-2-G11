@@ -1,0 +1,33 @@
+{% extends 'noticias/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+
+    <h1 class="page-title">{{ categoria_nome }}</h1>
+
+    <div class="noticias-container">
+        {% for noticia in noticias %}
+            <a href="{% url 'detalhe_noticia' noticia.id %}" class="noticia-card-link">
+                <article class="noticia-card">
+
+                    {% if noticia.imagem_capa_url %}
+                        <img src="{{ noticia.imagem_capa_url }}" class="capa-noticia">
+                    {% else %}
+                        <img src="{% static 'images/sem_capa.jpg' %}" class="capa-noticia">
+                    {% endif %}
+
+                    <h3>{{ noticia.titulo }}</h3>
+                    <p class="noticia-meta">
+                        Por: {{ noticia.autor.username }} —
+                        {{ noticia.data_publicacao|date:"d/m/Y" }}
+                    </p>
+                </article>
+            </a>
+        {% empty %}
+            <p>Nenhuma notícia de política encontrada.</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}
