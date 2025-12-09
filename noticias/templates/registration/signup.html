@@ -1,75 +1,108 @@
-{% extends "noticias/base.html" %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta - Jornal do Commercio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
-{% block content %}
+    <link rel="stylesheet" href="{% static 'noticias/css/style.css' %}">
+    
+    <style>
+        /* Centraliza a caixa na tela */
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Lato', sans-serif;
+            position: relative; /* Necessário para posicionar os botões no canto */
+        }
+        
+        /* Ajuste do fundo da página no modo escuro */
+        body.alto-contraste {
+            background-color: #000;
+        }
 
-<style>
-    /* Oculta TODO o layout da base só nesta página */
-    header,
-    .main-nav,
-    .header-divider,
-    .site-footer,
-    #menu-toggle,
-    #menu-overlay,
-    #side-menu {
-        display: none !important;
-    }
+        /* Posiciona os botões de acessibilidade no canto superior direito */
+        .top-right-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
 
-    /* Faz a página ficar limpa e centralizada */
-    body {
-        background: #ffffff;
-        margin: 0;
-        padding: 0;
-    }
+        /* Ajustes dos textos de ajuda e erros */
+        .helptext {
+            display: block;
+            font-size: 0.8rem;
+            color: #666;
+            margin-bottom: 10px;
+            margin-top: -5px;
+        }
+        
+        body.alto-contraste .helptext {
+            color: #ccc;
+        }
 
-    .signup-container {
-        max-width: 450px;
-        margin: 80px auto;
-        padding: 25px;
-        border-radius: 10px;
-        background: #fff;
-        box-shadow: 0 0 10px rgba(0,0,0,0.15);
-        font-family: Arial, sans-serif;
-    }
+        .errorlist {
+            color: #dc3545;
+            list-style: none;
+            padding: 0;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
 
-    .signup-container h2 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+    <div class="top-right-controls acessibilidade-controles">
+        <button id="diminuir-fonte" aria-label="Diminuir fonte" title="Diminuir fonte">A-</button>
+        <button id="aumentar-fonte" aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
+        <button id="alto-contraste" aria-label="Modo de alto contraste" title="Modo de Alto Contraste">◐</button>
+    </div>
 
-    button {
-        width: 100%;
-        padding: 10px;
-        margin-top: 10px;
-        background: #b80000;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
+    <div class="login-card">
+        <h2>Criar Conta</h2>
 
-    button:hover {
-        background: #900000;
-    }
+        <form method="post">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div style="margin-bottom: 15px; text-align: left;">
+                    
+                    <label for="{{ field.id_for_label }}" style="display: block; margin-bottom: 5px; font-weight: bold;">
+                        {{ field.label }}
+                    </label>
+                    
+                    {{ field }}
+                    
+                    {% if field.help_text %}
+                        <span class="helptext">{{ field.help_text }}</span>
+                    {% endif %}
+                    
+                    {% if field.errors %}
+                        <div class="errorlist">
+                            {{ field.errors }}
+                        </div>
+                    {% endif %}
+                </div>
+            {% endfor %}
 
-    .signup-container a {
-        display: block;
-        text-align: center;
-        margin-top: 10px;
-    }
-</style>
+            <button type="submit">Cadastrar</button>
+        </form>
 
-<div class="signup-container">
-    <h2>Criar Conta</h2>
+        <a href="{% url 'login' %}">Já tem conta? Fazer login</a>
+    </div>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Cadastrar</button>
-    </form>
+    <script src="{% static 'noticias/js/main.js' %}"></script>
 
-    <a href="{% url 'login' %}">Já tem conta? Fazer login</a>
-</div>
-
-{% endblock %}
+</body>
+</html>

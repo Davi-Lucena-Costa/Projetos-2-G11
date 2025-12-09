@@ -1,96 +1,57 @@
-{% extends "noticias/base.html" %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Jornal do Commercio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
-{% block content %}
-
-<style>
-    /* Esconde todo o layout padrão nesta página */
-    header,
-    .main-nav,
-    .header-divider,
-    .site-footer,
-    #menu-toggle,
-    #menu-overlay,
-    #side-menu {
-        display: none !important;
-    }
-
-    body {
-        background: #ffffff;
-        margin: 0;
-        padding: 0;
-    }
-
-    .login-container {
-        max-width: 400px;
-        margin: 90px auto;
-        padding: 25px;
-        border-radius: 10px;
-        background: #fff;
-        box-shadow: 0 0 10px rgba(0,0,0,0.15);
-        font-family: Arial, sans-serif;
-    }
-
-    h2 {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    input {
-        width: 100%;
-        padding: 8px;
-        margin-top: 5px;
-    }
-
-    button {
-        width: 100%;
-        padding: 10px;
-        margin-top: 15px;
-        background: #b80000;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-
-    button:hover {
-        background: #900000;
-    }
-
-    .signup-link {
-        text-align: center;
-        margin-top: 10px;
-        display: block;
-    }
-
-    .error-msg {
-        color: red;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-</style>
-
-<div class="login-container">
-
-    <h2>Entrar</h2>
-
-    {% if form.errors %}
-        <p class="error-msg">Usuário ou senha incorretos.</p>
-    {% endif %}
-
-    <form method="post">
-        {% csrf_token %}
+    <link rel="stylesheet" href="{% static 'noticias/css/style.css' %}">
+    
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f2f5; 
+        }
         
-        <label for="id_username">Usuário</label>
-        <input type="text" name="username" required autofocus>
+        body.alto-contraste {
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
 
-        <label for="id_password">Senha</label>
-        <input type="password" name="password" required>
+    <div class="login-card">
 
-        <button type="submit">Entrar</button>
-    </form>
+        <h2>Entrar</h2>
 
-    <a class="signup-link" href="{% url 'signup' %}">Não tem conta? Criar conta</a>
-</div>
+        {% if form.errors %}
+            <p style="color:red; font-weight:600;">Usuário ou senha incorretos.</p>
+        {% endif %}
 
-{% endblock %}
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="id_username">Usuário</label>
+            <input type="text" name="username" autofocus required id="id_username">
+
+            <label for="id_password">Senha</label>
+            <input type="password" name="password" required id="id_password">
+
+            <button type="submit">Entrar</button>
+
+            <a href="{% url 'signup' %}">Não tem conta? Criar conta</a>
+
+        </form>
+    </div>
+
+    <script src="{% static 'noticias/js/main.js' %}"></script>
+</body>
+</html>
