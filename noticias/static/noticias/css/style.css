@@ -728,110 +728,7 @@ main {
     font-size: 1.2rem;
 }
 
-/* --- ESTILOS DO MODO DE ALTO CONTRASTE --- */
-
-body.alto-contraste {
-    background-color: #000;
-    color: #fff;
-}
-
-body.alto-contraste .site-header,
-body.alto-contraste .noticia-card,
-body.alto-contraste .artigo-principal,
-body.alto-contraste .sugestao-section,
-body.alto-contraste .comentario-card,
-body.alto-contraste .login-prompt,
-body.alto-contraste .empty-message {
-    background-color: #1a1a1a;
-    border-color: #555;
-    color: #fff;
-}
-
-body.alto-contraste .brand-badge {
-    background-color: #000;
-    border: 1px solid #fff;
-}
-body.alto-contraste .brand-badge-text {
-    color: #fff;
-}
-body.alto-contraste .brand-badge:hover .brand-badge-text {
-    color: #ffff00;
-}
-
-body.alto-contraste h1,
-body.alto-contraste h2,
-body.alto-contraste h3,
-body.alto-contraste .logo a,
-body.alto-contraste .main-nav a,
-body.alto-contraste .comentario-info strong {
-    color: #fff;
-}
-
-body.alto-contraste a {
-    color: #FFFF00;
-}
-
-body.alto-contraste .btn-primary {
-    background-color: #FFFF00;
-    color: #000;
-    border-color: #FFFF00;
-}
-body.alto-contraste .btn-danger {
-    background-color: #FF4136;
-    color: #fff;
-}
-
-body.alto-contraste .site-footer {
-    background-color: #111;
-}
-
-body.alto-contraste .acessibilidade-controles button {
-    background-color: #333;
-    border-color: #777;
-    color: #fff;
-}
-body.alto-contraste .acessibilidade-controles button:hover {
-    background-color: #555;
-}
-
-body.alto-contraste .search-form input[type="text"] {
-    background-color: #333;
-    border-color: #777;
-    color: #fff;
-}
-body.alto-contraste .search-form .search-btn {
-    background-color: #222;
-    border-color: #777;
-    color: #fff;
-}
-
-body.alto-contraste .radio-player-wrapper {
-    background-color: #000;
-    border-color: #fff;
-    color: #fff;
-}
-body.alto-contraste .programa-item {
-    background-color: #000;
-    border-color: #fff;
-    color: #fff;
-}
-body.alto-contraste .programa-horario {
-    color: #ffff00;
-}
-body.alto-contraste .programa-detalhes {
-    border-left-color: #fff;
-}
-body.alto-contraste .programa-nome {
-    color: #fff;
-}
-body.alto-contraste .programa-apresentador {
-    color: #ccc;
-}
-
 /* --- 15. ESTILOS DA PÁGINA DE RÁDIO --- */
-/* Esta seção é nova e usa suas variáveis existentes */
-
-/* Container para o player */
 .radio-player-wrapper {
     max-width: 740px;
     margin: 0 auto 2rem auto;
@@ -849,7 +746,6 @@ body.alto-contraste .programa-apresentador {
     text-align: center;
 }
 
-/* Player de áudio */
 .radio-player {
     width: 100%;
     margin-top: 1rem;
@@ -857,7 +753,6 @@ body.alto-contraste .programa-apresentador {
     border: 1px solid var(--color-border);
 }
 
-/* Container para a grade de programação */
 .programacao-wrapper {
     max-width: 960px; 
     margin: 0 auto;
@@ -869,7 +764,6 @@ body.alto-contraste .programa-apresentador {
     gap: 1rem; 
 }
 
-/* Estilo de cada item da programação */
 .programa-item {
     display: flex;
     align-items: center;
@@ -907,4 +801,214 @@ body.alto-contraste .programa-apresentador {
     font-size: 0.95rem;
     color: #6c757d;
     font-style: italic;
+}
+
+/* --- 16. ESTILOS DA PÁGINA DE LOGIN (MOVIDO DO HTML) --- */
+
+.login-card {
+    max-width: 420px;
+    margin: 60px auto;
+    padding: 35px;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+}
+
+.login-card h2 {
+    color: #4f46e5;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.login-card label {
+    float: left;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.login-card input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.login-card button {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    background: #4f46e5;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.login-card button:hover {
+    background: #4338ca;
+}
+
+.login-card a {
+    display: block;
+    margin-top: 15px;
+    color: #4f46e5;
+    text-decoration: none;
+}
+
+.login-card a:hover {
+    text-decoration: underline;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* --- ESTILOS DO MODO DE ALTO CONTRASTE --- */
+
+body.alto-contraste {
+    background-color: #000;
+    color: #fff;
+}
+
+body.alto-contraste .site-header,
+body.alto-contraste .noticia-card,
+body.alto-contraste .artigo-principal,
+body.alto-contraste .sugestao-section,
+body.alto-contraste .comentario-card,
+body.alto-contraste .login-prompt,
+body.alto-contraste .empty-message,
+body.alto-contraste .radio-player-wrapper,
+body.alto-contraste .programa-item {
+    background-color: #1a1a1a;
+    border-color: #555;
+    color: #fff;
+}
+
+/* Forçar a cor branca em todos os textos para garantir legibilidade */
+body.alto-contraste p,
+body.alto-contraste li,
+body.alto-contraste span,
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste h4,
+body.alto-contraste h5,
+body.alto-contraste h6,
+body.alto-contraste .conteudo-noticia,
+body.alto-contraste .comentario-conteudo {
+    color: #fff !important;
+}
+
+body.alto-contraste .brand-badge {
+    background-color: #000;
+    border: 1px solid #fff;
+}
+body.alto-contraste .brand-badge-text {
+    color: #fff;
+}
+body.alto-contraste .brand-badge:hover .brand-badge-text {
+    color: #ffff00;
+}
+
+body.alto-contraste .logo a,
+body.alto-contraste .main-nav a,
+body.alto-contraste .comentario-info strong,
+body.alto-contraste .programa-nome {
+    color: #fff;
+}
+
+body.alto-contraste a {
+    color: #FFFF00 !important;
+}
+
+body.alto-contraste .btn-primary {
+    background-color: #FFFF00;
+    color: #000;
+    border-color: #FFFF00;
+}
+body.alto-contraste .btn-danger {
+    background-color: #FF4136;
+    color: #fff;
+}
+
+body.alto-contraste .site-footer {
+    background-color: #111;
+}
+
+body.alto-contraste .acessibilidade-controles button {
+    background-color: #333;
+    border-color: #777;
+    color: #fff;
+}
+body.alto-contraste .acessibilidade-controles button:hover {
+    background-color: #555;
+}
+
+body.alto-contraste .search-form input[type="text"] {
+    background-color: #333;
+    border-color: #777;
+    color: #fff;
+}
+body.alto-contraste .search-form .search-btn {
+    background-color: #222;
+    border-color: #777;
+    color: #fff;
+}
+
+body.alto-contraste .programa-horario {
+    color: #ffff00;
+}
+body.alto-contraste .programa-detalhes {
+    border-left-color: #fff;
+}
+body.alto-contraste .programa-apresentador {
+    color: #ccc;
+}
+
+body.alto-contraste .login-card {
+    background-color: #1a1a1a !important;
+    border: 1px solid #555 !important;
+    box-shadow: none !important; 
+}
+
+body.alto-contraste .login-card h2,
+body.alto-contraste .login-card label {
+    color: #fff !important;
+}
+
+body.alto-contraste .login-card input[type="text"],
+body.alto-contraste .login-card input[type="password"] {
+    background-color: #333 !important;
+    border: 1px solid #777 !important;
+    color: #fff !important;
+}
+
+body.alto-contraste .login-card input:focus {
+    border-color: #FFFF00 !important;
+    outline: none !important;
+}
+
+body.alto-contraste .login-card button {
+    background-color: #FFFF00 !important;
+    color: #000 !important;
+}
+body.alto-contraste .login-card button:hover {
+    background-color: #d4d400 !important;
+}
+
+body.alto-contraste .login-card a {
+    color: #FFFF00 !important;
+}
+
+body.alto-contraste .menu-toggle img {
+    filter: invert(100%);
+}
+
+body.alto-contraste .search-btn {
+    filter: invert(100%);
 }

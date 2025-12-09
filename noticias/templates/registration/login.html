@@ -1,24 +1,57 @@
-{% extends "noticias/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Jornal do Commercio</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
 
-{% block title %}Login{% endblock %}
+    <link rel="stylesheet" href="{% static 'noticias/css/style.css' %}">
+    
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #f0f2f5; 
+        }
+        
+        body.alto-contraste {
+            background-color: #000;
+        }
+    </style>
+</head>
+<body>
 
-{% block content %}
-<div class="container" style="max-width: 400px; margin-top: 40px;">
-    <h2>Entrar</h2>
+    <div class="login-card">
 
-    {% if form.errors %}
-        <p style="color:red;">Usuário ou senha incorretos.</p>
-    {% endif %}
+        <h2>Entrar</h2>
 
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Entrar</button>
-    </form>
+        {% if form.errors %}
+            <p style="color:red; font-weight:600;">Usuário ou senha incorretos.</p>
+        {% endif %}
 
-    <p style="margin-top:10px;">
-        Não tem conta?
-        <a href="{% url 'signup' %}">Criar conta</a>
-    </p>
-</div>
-{% endblock %}
+        <form method="post">
+            {% csrf_token %}
+
+            <label for="id_username">Usuário</label>
+            <input type="text" name="username" autofocus required id="id_username">
+
+            <label for="id_password">Senha</label>
+            <input type="password" name="password" required id="id_password">
+
+            <button type="submit">Entrar</button>
+
+            <a href="{% url 'signup' %}">Não tem conta? Criar conta</a>
+
+        </form>
+    </div>
+
+    <script src="{% static 'noticias/js/main.js' %}"></script>
+</body>
+</html>
