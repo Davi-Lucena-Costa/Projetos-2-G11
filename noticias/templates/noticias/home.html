@@ -11,7 +11,13 @@
             
             <a href="{% url 'detalhe_noticia' noticia.id %}" class="noticia-card-link">
                 <article class="noticia-card">
-                    
+
+                    {% if noticia.imagem_capa_url %}
+                        <img src="{{ noticia.imagem_capa_url }}" alt="Capa da notícia" class="capa-noticia">
+                    {% else %}
+                        <img src="{% static 'images/sem_capa.jpg' %}" alt="Sem imagem" class="capa-noticia">
+                    {% endif %}
+
                     <h3>{{ noticia.titulo }}</h3>
                     <p class="noticia-meta">
                         Por: {{ noticia.autor.username }} em {{ noticia.data_publicacao|date:"d/m/Y" }}
@@ -32,13 +38,14 @@
         
         <form action="{% url 'home' %}" method="POST" class="sugestao-form">
             {% csrf_token %}
+
             <textarea name="sugestao_texto" rows="3" placeholder="Sua sugestão...">{{ sugestao.texto_sugerido }}</textarea>
-            
+
             {% if sugestao.erro %}
                 <p class="error-message">{{ sugestao.erro }}</p>
             {% endif %}
-            
-            <button type="submit" name="sugestao_texto" class="btn btn-primary">Enviar Sugestão</button>
+
+            <button type="submit" class="btn btn-primary">Enviar Sugestão</button>
         </form>
     </section>
 

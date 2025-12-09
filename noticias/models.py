@@ -13,7 +13,7 @@ class Noticia(models.Model):
     data_publicacao = models.DateTimeField(auto_now_add=True)
     autor = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL, null=True)
-
+    imagem_capa_url = models.URLField(max_length=500, null=True, blank=True)
     def __str__(self):
         return self.titulo
     
