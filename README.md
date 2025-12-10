@@ -69,3 +69,12 @@ python manage.py createsuperuser
 Agora basta iniciar o servidor local:
 
 python manage.py runserver
+
+---
+
+## 🎥 Screencast
+
+Confira o vídeo demonstrativo do nosso site em funcionamento:
+[**📺 Assistir no YouTube**](https://youtu.be/LCIPnGnmC9A)
+
+---
