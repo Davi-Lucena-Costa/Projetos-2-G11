@@ -22,10 +22,9 @@
 
         <hr>
 
-        
         <div class="modo-leitura-container" id="container-botao-modo">
             <button class="btn" id="btn-modo-leitura">
-                Ativar modo de leitura
+                Leitura Simplificada
             </button>
         </div>
 
@@ -90,16 +89,29 @@
 
 
 <style>
+    /* Estilos normais do Modo Leitura */
     .modo-leitura-fullscreen {
         position: fixed;
         top: 0;
         left: 0;
         width: 100vw;
         height: 100vh;
-        background: #ffffff;
+        background: #ffffff; /* Fundo branco padrão */
         padding: 40px;
         overflow-y: auto;
         z-index: 9999;
+    }
+
+    /* ALTERAÇÃO 2: Correção para o Modo Escuro (Alto Contraste) */
+    body.alto-contraste .modo-leitura-fullscreen {
+        background-color: #000000 !important; /* Força fundo preto */
+        color: #ffffff !important; /* Força texto branco */
+    }
+    
+    /* Garante que o texto do conteúdo clonado também fique branco */
+    body.alto-contraste .modo-leitura-conteudo,
+    body.alto-contraste .modo-leitura-conteudo * {
+        color: #ffffff !important;
     }
 
     .modo-leitura-conteudo {
@@ -109,7 +121,6 @@
         line-height: 1.8em;
     }
 
-    
     #btn-modo-leitura,
     .btn-sair-modo {
         background-color: #D10000; 
@@ -138,19 +149,16 @@
 
         modoAtivo = true;
 
-       
         const leituraDiv = document.createElement('div');
         leituraDiv.id = 'leitura-fullscreen';
         leituraDiv.className = 'modo-leitura-fullscreen';
 
-        
         const conteudoOriginal = document.getElementById('conteudo-artigo').cloneNode(true);
 
-        
         conteudoOriginal.querySelectorAll('img').forEach(img => img.remove());
 
         leituraDiv.innerHTML = `
-            <button class="btn btn-sair-modo" id="btn-sair-leitura">Sair do modo leitura</button>
+            <button class="btn btn-sair-modo" id="btn-sair-leitura">Sair da Leitura Simplificada</button>
             <div class="modo-leitura-conteudo"></div>
         `;
 
@@ -158,7 +166,6 @@
 
         document.body.appendChild(leituraDiv);
 
-        
         document.getElementById('btn-sair-leitura').addEventListener('click', () => {
             document.getElementById('leitura-fullscreen').remove();
             modoAtivo = false;
