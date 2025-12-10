@@ -17,7 +17,7 @@ Este projeto tem como objetivo **conquistar a fidelidade dos clientes do Jornal 
 
 ### 📊 Backlog do Projeto
 
-![Backlog do Projeto](https://raw.githubusercontent.com/Davi-Lucena-Costa/Projetos-2-G11/main/imagens/jira.png)
+![Backlog do Projeto](imagens/jira.png)
 
 ---
 
