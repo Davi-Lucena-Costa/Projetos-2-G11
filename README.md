@@ -1,4 +1,4 @@
-# 📈 Otimizando o site do Jornal do Commercio e buscando a fidelidade dos clientes 
+# 📈 Otimizando o site do Jornal do Commercio e buscando a fidelidade dos clientes
 
 ## 🎯 Objetivo do Projeto
 Este projeto tem como objetivo **conquistar a fidelidade dos clientes do Jornal do Commercio**, oferecendo uma experiência digital mais agradável por meio de **estratégias de otimização do site**.
@@ -9,17 +9,26 @@ Este projeto tem como objetivo **conquistar a fidelidade dos clientes do Jornal 
 - Melhoria da **imagem da marca** como um veículo moderno e acessível
 - **Maior engajamento** com o conteúdo jornalístico
 
-## 🔗 Acompanhe Mais
-- 🚀 **[Site no Ar](https://projetos-2-g11.onrender.com)**
+## 🔗 Links Importantes
+- 🚀 **[Site no Ar (Deploy)](https://projetos-2-g11.onrender.com)**
 - 📄 **[Histórias de usuário e cenários](https://docs.google.com/document/d/1dRo1rZinYxXtpklP78JwofUMNUwflzO9PsG-q0wJt4M/edit?tab=t.0)**
 - 🌐 **[Site oficial do grupo](https://sites.google.com/cesar.school/g11/home)**
 - 📖 **[Relatório de Pair Programming](https://github.com/Davi-Lucena-Costa/Projetos-2-G11/wiki/Relat%C3%B3rio-de-Pair-Programming)**
 
 ### 📊 Backlog do Projeto
 
-![Backlog do Projeto com histórias concluídas](https://raw.githubusercontent.com/Davi-Lucena-Costa/Projetos-2-G11/main/imagens/jira.png)
+![Backlog do Projeto](imagens/jira.png)
 
 ---
+
+## 🎥 Screencast
+
+Confira o vídeo demonstrativo do nosso site em funcionamento:
+[**📺 Assistir no YouTube**](https://youtu.be/LCIPnGnmC9A)
+
+---
+
+
 
 ## 🛠️ Configuração do Ambiente de Desenvolvimento
 
@@ -69,3 +78,4 @@ python manage.py createsuperuser
 Agora basta iniciar o servidor local:
 
 python manage.py runserver
+
